@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../pansy_ui.dart';
+import 'package:pansy_ui/pansy_ui.dart';
 import '../app_localizations.dart';
 import '../localizations_delegates.dart';
 

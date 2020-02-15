@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:native_device_orientation/native_device_orientation.dart';
 
-import '../../../pansy_ui.dart';
+import 'package:pansy_ui/pansy_ui.dart';
 import 'animated_indexed_stack.dart';
 
 /// [UNestedTabModel] является моделью для представления вкладки,

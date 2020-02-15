@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:picbox/ui/widget/pansy_ui.dart';
+import 'package:pansy_ui/pansy_ui.dart';
 
 /// Создаёт виджет выбора, предназначенный для отображения
 /// в списке.

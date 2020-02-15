@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../../pansy_ui.dart';
+import 'package:pansy_ui/pansy_ui.dart';
 
 /// Создает визуальную основу для виджетов.
 class UScaffold extends StatefulWidget {
