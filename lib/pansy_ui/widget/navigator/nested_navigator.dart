@@ -29,6 +29,7 @@ class UNestedNavigator extends StatefulWidget {
   final List<UNestedTabModel> tabs;
   final ValueChanged<int> onTap;
   final ValueGetter shouldHandlePop;
+  final Route<dynamic> Function(RouteSettings) onGenerateRoute;
 
   final Color backgroundColor;
   final Color color;
@@ -42,6 +43,7 @@ class UNestedNavigator extends StatefulWidget {
     this.color,
     this.selectedColor,
     this.shouldHandlePop = _defaultShouldHandlePop,
+    this.onGenerateRoute,
   }) : assert(tabs != null);
 
   static bool _defaultShouldHandlePop() => true;
@@ -131,6 +133,7 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
 
   /// Создаёт вкладку.
   Widget _buildNavigator(UNestedTabModel tab) => UNestedTab(
+        onGenerateRoute: widget.onGenerateRoute,
         navigatorKey: tab._navigatorKey,
         initPageBuilder: tab.initPageBuilder,
       );
@@ -157,7 +160,7 @@ class UNestedTab extends StatelessWidget {
   UNestedTab(
       {@required this.navigatorKey,
       @required this.initPageBuilder,
-      this.onGenerateRoute});
+      @required this.onGenerateRoute});
 
   final GlobalKey<NavigatorState> navigatorKey;
   final WidgetBuilder initPageBuilder;
