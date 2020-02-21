@@ -32,7 +32,7 @@ class SelectionDialog extends StatelessWidget {
         constraints: BoxConstraints(maxHeight: 365),
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withOpacity(0.1),
@@ -42,7 +42,7 @@ class SelectionDialog extends StatelessWidget {
         ),
         child: Material(
           color: Colors.transparent,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.circular(10),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Column(
             mainAxisSize: MainAxisSize.min,

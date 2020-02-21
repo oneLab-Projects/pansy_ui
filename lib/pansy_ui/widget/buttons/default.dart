@@ -23,7 +23,7 @@ class URaisedButton extends StatelessWidget {
       opacity: onPressed != null ? 1 : 0.9,
       duration: Duration(milliseconds: 150),
       child: Material(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: BorderRadius.circular(5),
         color: Theme.of(context).primaryColor,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: InkWell(

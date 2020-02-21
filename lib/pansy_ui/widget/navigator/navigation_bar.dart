@@ -170,7 +170,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
         child: InkWell(
           splashColor: Colors.black12,
           highlightColor: Colors.black12,
-          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderRadius: BorderRadius.circular(5),
           onTap: () => onPressed(index),
           child: Stack(
             children: <Widget>[
@@ -184,8 +184,9 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
                   width: item.badge ? 8 : 0,
                   height: item.badge ? 8 : 0,
                   decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ],

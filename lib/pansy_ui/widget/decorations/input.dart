@@ -15,14 +15,14 @@ class InputDesign extends InputDecoration {
           filled: true,
           fillColor: Theme.of(context).cardColor,
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
               width: 1,
               color: Theme.of(context).cursorColor.withAlpha(20),
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
               width: 2,
               color: Theme.of(context).cursorColor.withAlpha(20),
@@ -46,11 +46,11 @@ class RoundInputDesign extends InputDecoration {
               ),
           fillColor: Theme.of(context).cardColor,
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderRadius: BorderRadius.circular(50),
             borderSide: BorderSide(style: BorderStyle.none),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderRadius: BorderRadius.circular(50),
             borderSide: BorderSide(
               width: 2,
               color: Theme.of(context).hintColor,

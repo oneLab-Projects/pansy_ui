@@ -127,7 +127,7 @@ class ContentCard extends StatelessWidget {
         opacity: variant != ContentCardVariant.nano ? 1 : 0.4,
         child: Material(
           color: Theme.of(context).cardColor,
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          borderRadius: BorderRadius.circular(15),
           clipBehavior: Clip.antiAlias,
           child: child,
         ),

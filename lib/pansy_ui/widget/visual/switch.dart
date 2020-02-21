@@ -17,11 +17,12 @@ class _USwitchVisualState extends State<USwitchVisual> {
       width: 30,
       height: 12,
       decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).primaryColor, width: 2),
-          color: (widget.value
-              ? Theme.of(context).primaryColor
-              : Colors.transparent),
-          borderRadius: BorderRadius.all(Radius.circular(10))),
+        border: Border.all(color: Theme.of(context).primaryColor, width: 2),
+        color: (widget.value
+            ? Theme.of(context).primaryColor
+            : Colors.transparent),
+        borderRadius: BorderRadius.circular(10),
+      ),
     );
   }
 }
