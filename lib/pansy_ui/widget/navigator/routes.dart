@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pansy_ui/pansy_ui.dart';
 
-class Routes {
+class RouteNavigator {
   /// Callback-генератор маршрутов. Используется, когда приложение перемещается по названному маршруту.
   static Route<dynamic> onGenerateRoute(
     RouteSettings settings,
