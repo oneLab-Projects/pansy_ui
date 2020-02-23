@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:native_device_orientation/native_device_orientation.dart';
 
 import 'package:pansy_ui/pansy_ui.dart';
+import 'package:pansy_ui/pansy_ui/widget/navigator/routes.dart';
 import 'animated_indexed_stack.dart';
 
 /// [UNestedTabModel] является моделью для представления вкладки,
@@ -29,7 +30,7 @@ class UNestedNavigator extends StatefulWidget {
   final List<UNestedTabModel> tabs;
   final ValueChanged<int> onTap;
   final ValueGetter shouldHandlePop;
-  final Route<dynamic> Function(RouteSettings) onGenerateRoute;
+  final Map<String, Widget> routes;
 
   final Color backgroundColor;
   final Color color;
@@ -43,7 +44,7 @@ class UNestedNavigator extends StatefulWidget {
     this.color,
     this.selectedColor,
     this.shouldHandlePop = _defaultShouldHandlePop,
-    this.onGenerateRoute,
+    this.routes,
   }) : assert(tabs != null);
 
   static bool _defaultShouldHandlePop() => true;
@@ -133,7 +134,7 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
 
   /// Создаёт вкладку.
   Widget _buildNavigator(UNestedTabModel tab) => UNestedTab(
-        onGenerateRoute: widget.onGenerateRoute,
+        routes: widget.routes,
         navigatorKey: tab._navigatorKey,
         initPageBuilder: tab.initPageBuilder,
       );
@@ -157,24 +158,25 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
 
 /// Создаёт вкладку, работающую с [UNestedNavigator]
 class UNestedTab extends StatelessWidget {
-  UNestedTab(
-      {@required this.navigatorKey,
-      @required this.initPageBuilder,
-      @required this.onGenerateRoute});
+  UNestedTab({
+    @required this.navigatorKey,
+    @required this.initPageBuilder,
+    @required this.routes,
+  });
 
   final GlobalKey<NavigatorState> navigatorKey;
   final WidgetBuilder initPageBuilder;
-  final Route<dynamic> Function(RouteSettings) onGenerateRoute;
+  final Map<String, Widget> routes;
 
   @override
   Widget build(BuildContext context) => Navigator(
         key: navigatorKey,
         observers: [HeroController()],
-        onGenerateRoute: (routeSettings) =>
-            onGenerateRoute ??
-            UPageRoute(
-              builder: (context) => initPageBuilder(context),
-              settings: routeSettings,
-            ),
+        onGenerateRoute: (routeSettings) => routes != null
+            ? Routes.onGenerateRoute(routeSettings, routes, initPageBuilder)
+            : UPageRoute(
+                builder: (context) => initPageBuilder(context),
+                settings: routeSettings,
+              ),
       );
 }
