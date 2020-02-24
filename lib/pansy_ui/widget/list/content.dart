@@ -10,17 +10,15 @@ class UListContent extends StatelessWidget {
     this.iconData,
     this.onPressed,
     this.onLongPress,
-    this.child,
+    @required this.child,
     this.variant = false,
   });
 
-  @required
   final String caption;
   final String description;
   final IconData iconData;
   final Function onLongPress;
   final Function onPressed;
-  @required
   final Widget child;
   final bool variant;
 

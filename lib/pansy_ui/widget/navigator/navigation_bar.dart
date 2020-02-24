@@ -25,7 +25,6 @@ class UBottomNavigationBar extends StatefulWidget {
     this.onTabSelected,
   }) : assert(items != null);
 
-  @required
   final List<UBottomNavigationBarItem> items;
   final double iconSize;
   final ValueChanged<int> onTabSelected;

@@ -13,7 +13,6 @@ class UListButton extends StatelessWidget {
     this.onLongPress,
   });
 
-  @required
   final String caption;
   final String description;
   final IconData iconData;

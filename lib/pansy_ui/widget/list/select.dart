@@ -12,7 +12,6 @@ class UListSelect extends StatelessWidget {
     this.onPressed,
   });
 
-  @required
   final String caption;
   final String description;
   final String value;
