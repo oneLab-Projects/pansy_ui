@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 class ClearBehavior extends ScrollBehavior {
   @override
   Widget buildViewportChrome(
-          BuildContext context, Widget child, AxisDirection axisDirection) =>
-      child;
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
+  }
 }
