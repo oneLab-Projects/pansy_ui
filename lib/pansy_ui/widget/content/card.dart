@@ -10,17 +10,19 @@ class ContentCard extends StatelessWidget {
   ContentCard({
     @required this.title,
     this.description,
+    this.image,
     this.urlImage,
     this.textColor,
     this.height,
     this.width,
     this.variant,
-  });
+  }) : assert(image != null || urlImage == null);
 
   final String title;
   final String description;
-  final Color textColor;
+  final ImageProvider image;
   final String urlImage;
+  final Color textColor;
   final double height;
   final double width;
   final ContentCardVariant variant;
@@ -103,12 +105,17 @@ class ContentCard extends StatelessWidget {
       children: <Widget>[
         Transform.scale(
           scale: 1.001,
-          child: FadeInImage.memoryNetwork(
-            fadeInDuration: Duration(milliseconds: 150),
-            placeholder: kTransparentImage,
-            image: urlImage,
-            fit: BoxFit.fitHeight,
-          ),
+          child: image != null && urlImage == null
+              ? Image(
+                  image: image,
+                  fit: BoxFit.fitHeight,
+                )
+              : FadeInImage.memoryNetwork(
+                  fadeInDuration: Duration(milliseconds: 150),
+                  placeholder: kTransparentImage,
+                  image: urlImage,
+                  fit: BoxFit.fitHeight,
+                ),
         ),
         Container(
           color: Colors.grey.withOpacity(0.4),
