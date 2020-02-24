@@ -1,5 +1,5 @@
-export 'widget/buttons/default.dart';
-export 'widget/buttons/icon.dart';
+export 'widget/button/raised.dart';
+export 'widget/button/icon.dart';
 
 export 'widget/content/card.dart';
 
@@ -13,12 +13,14 @@ export 'widget/list/select.dart';
 export 'widget/list/switch.dart';
 export 'widget/list/widget.dart';
 
+export 'widget/navigator/animated_indexed_stack.dart';
 export 'widget/navigator/navigation_bar.dart';
 export 'widget/navigator/nested_navigator.dart';
+export 'widget/navigator/route_navigator.dart';
 
-export 'widget/routes/default.dart';
+export 'widget/route/default.dart';
 
-export 'widget/sheets/scaffold.dart';
+export 'widget/sheet/scaffold.dart';
 
 export 'widget/visual/switch.dart';
 
