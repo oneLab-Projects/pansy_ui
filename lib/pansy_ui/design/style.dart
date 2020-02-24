@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 class Style {
   /// Хранит настроенный под дизайн приложения [TextTheme].
   static const TextTheme textTheme = TextTheme(
-    title: TextStyle(
+    headline6: TextStyle(
       fontFamily: 'Ubuntu',
       fontSize: 19,
     ),
-    subtitle: TextStyle(
+    subtitle1: TextStyle(
       fontFamily: 'Ubuntu',
       fontSize: 13.4,
     ),

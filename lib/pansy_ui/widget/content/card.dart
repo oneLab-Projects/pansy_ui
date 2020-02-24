@@ -74,7 +74,7 @@ class ContentCard extends StatelessWidget {
   Widget _buildCaption(BuildContext context) {
     return Text(
       title,
-      style: Theme.of(context).textTheme.title.copyWith(
+      style: Theme.of(context).textTheme.headline6.copyWith(
           fontSize: variant != ContentCardVariant.mini ? 17 : 15,
           fontWeight: FontWeight.w500,
           color: textColor ?? Colors.white),
@@ -89,7 +89,7 @@ class ContentCard extends StatelessWidget {
         opacity: 0.7,
         child: Text(
           description,
-          style: Theme.of(context).textTheme.title.copyWith(
+          style: Theme.of(context).textTheme.headline6.copyWith(
               fontSize: 12,
               fontWeight: FontWeight.w500,
               color: textColor ?? Colors.white),

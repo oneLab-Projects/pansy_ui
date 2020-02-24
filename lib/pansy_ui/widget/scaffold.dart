@@ -183,7 +183,7 @@ class _UScaffoldState extends State<UScaffold> {
                 widget.title,
                 style: Theme.of(context)
                     .textTheme
-                    .title
+                    .headline6
                     .copyWith(fontSize: 20, fontWeight: FontWeight.w500),
               ),
             ),
@@ -224,7 +224,7 @@ class _UScaffoldState extends State<UScaffold> {
           if (widget.title != null)
             Text(
               widget.title,
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.headline6,
             ),
         ],
       ),

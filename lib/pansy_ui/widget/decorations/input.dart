@@ -7,9 +7,9 @@ class InputDesign extends InputDecoration {
     String hintText,
   }) : super(
           hintText: hintText,
-          labelStyle: Theme.of(context).textTheme.subhead.copyWith(
+          labelStyle: Theme.of(context).textTheme.subtitle1.copyWith(
               height: 1.4, color: Theme.of(context).textTheme.caption.color),
-          prefixStyle: Theme.of(context).textTheme.subhead.copyWith(
+          prefixStyle: Theme.of(context).textTheme.subtitle1.copyWith(
               height: 1.4, color: Theme.of(context).textTheme.caption.color),
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           filled: true,
@@ -40,7 +40,7 @@ class RoundInputDesign extends InputDecoration {
           hintText: hintText,
           contentPadding: const EdgeInsets.symmetric(horizontal: 18),
           filled: true,
-          hintStyle: Theme.of(context).textTheme.subhead.copyWith(
+          hintStyle: Theme.of(context).textTheme.subtitle1.copyWith(
                 fontSize: 17,
                 color: Theme.of(context).textTheme.caption.color,
               ),

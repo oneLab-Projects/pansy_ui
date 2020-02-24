@@ -50,7 +50,7 @@ class ScaffoldSheet extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.title,
+        style: Theme.of(context).textTheme.headline6,
       ),
     );
   }
@@ -63,7 +63,7 @@ class ScaffoldSheet extends StatelessWidget {
         textAlign: TextAlign.center,
         style: Theme.of(context)
             .textTheme
-            .subtitle
+            .subtitle1
             .copyWith(color: Theme.of(context).hintColor),
       ),
     );
