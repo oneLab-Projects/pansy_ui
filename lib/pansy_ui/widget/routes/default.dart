@@ -8,7 +8,6 @@ class UPageRoute<T> extends MaterialPageRoute<T> {
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    if (settings.isInitialRoute) return child;
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(1, 0),
