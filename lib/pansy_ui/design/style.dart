@@ -9,7 +9,7 @@ class Style {
       fontFamily: 'Ubuntu',
       fontSize: 19,
     ),
-    subtitle1: TextStyle(
+    subtitle2: TextStyle(
       fontFamily: 'Ubuntu',
       fontSize: 13.4,
     ),

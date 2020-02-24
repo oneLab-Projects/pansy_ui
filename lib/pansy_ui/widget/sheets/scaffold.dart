@@ -63,7 +63,7 @@ class ScaffoldSheet extends StatelessWidget {
         textAlign: TextAlign.center,
         style: Theme.of(context)
             .textTheme
-            .subtitle1
+            .subtitle2
             .copyWith(color: Theme.of(context).hintColor),
       ),
     );
