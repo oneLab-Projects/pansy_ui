@@ -8,7 +8,7 @@ enum ContentCardVariant { mini, nano }
 /// Создаёт карточку, предназначенную для работы с тематическими сборниками.
 class ContentCard extends StatelessWidget {
   ContentCard({
-    @required this.title,
+    this.title,
     this.description,
     this.image,
     this.urlImage,
