@@ -11,7 +11,7 @@ dependencies:
 
   # design
   ubuntu_font_flutter: ^0.0.1
-  flare_flutter: ^1.8.3
+  flare_flutter: ^2.0.1
   transparent_image: ^1.0.0
 
   # localizations
@@ -20,13 +20,13 @@ dependencies:
   devicelocale: ^0.2.1
 
   # bloc
-  flutter_bloc: ^3.1.0
+  flutter_bloc: ^3.2.0
 
   # db
-  shared_preferences: ^0.5.6
+  shared_preferences: ^0.5.6+2
 
   # ui
   native_device_orientation: ^0.3.0
 
   # compare
-  equatable: ^1.0.2
+  equatable: ^1.1.0
