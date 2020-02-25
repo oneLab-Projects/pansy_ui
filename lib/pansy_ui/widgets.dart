@@ -3,9 +3,9 @@ export 'widget/button/icon.dart';
 
 export 'widget/content/card.dart';
 
-export 'widget/decorations/input.dart';
+export 'widget/decoration/input.dart';
 
-export 'widget/dialogs/select.dart';
+export 'widget/dialog/select.dart';
 
 export 'widget/list/button.dart';
 export 'widget/list/content.dart';
