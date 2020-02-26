@@ -16,7 +16,7 @@ class ContentCard extends StatelessWidget {
     this.height,
     this.width,
     this.variant,
-  }) : assert(image != null || urlImage == null);
+  }) : assert(image == null || urlImage == null);
 
   final String title;
   final String description;
