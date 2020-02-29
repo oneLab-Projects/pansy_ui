@@ -40,6 +40,8 @@ class ThemeBloc {
     );
   }
 
+  bool isNightTheme() => _subjectNightTheme.value == nightTheme;
+
   /// Загружает настройки темы.
   void _loadSettings() async {
     if (_preferences == null)
