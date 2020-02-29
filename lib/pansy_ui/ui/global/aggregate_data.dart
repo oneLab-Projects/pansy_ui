@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'localizations/ui/localization_bloc_builder.dart';
+import 'localizations/ui/localizations_bloc_builder.dart';
 import 'theme/ui/theme_bloc_builder.dart';
 
 /// [AggregateData] является виджетом, цель которого – предоставить данные
@@ -12,8 +12,8 @@ class AggregateData extends StatelessWidget {
   AggregateData({@required this.builder}) : assert(builder != null);
 
   @override
-  Widget build(BuildContext ctx) {
-    return LocaleBlocBuilder(
+  Widget build(BuildContext context) {
+    return LocalizationsBlocBuilder(
       builder: (context, locale, supportedLocales, localizationsDelegates) {
         return ThemeBlocBuilder(
           builder: (context, themeData) {
