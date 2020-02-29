@@ -16,10 +16,11 @@ class LocalizationsBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<LocalizationsBloc>(
-      create: (_) => LocalizationsBloc(),
+    var bloc = LocalizationsBloc();
+    return ProxyProvider0<LocalizationsBloc>(
+      update: (_, __) => bloc,
       child: StreamBuilder(
-        stream: Provider.of<LocalizationsBloc>(context).locale,
+        stream: bloc.locale,
         builder: (context, AsyncSnapshot<Locale> snapshot) {
           return builder(
             context,

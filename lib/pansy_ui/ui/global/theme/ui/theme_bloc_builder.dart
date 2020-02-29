@@ -11,10 +11,11 @@ class ThemeBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<ThemeBloc>(
-      create: (context) => ThemeBloc(),
+    var bloc = ThemeBloc();
+    return ProxyProvider0<ThemeBloc>(
+      update: (_, __) => bloc,
       child: StreamBuilder(
-        stream: Provider.of<ThemeBloc>(context).theme,
+        stream: bloc.theme,
         builder: (context, AsyncSnapshot<ThemeData> snapshot) {
           return builder(context, snapshot.data);
         },
