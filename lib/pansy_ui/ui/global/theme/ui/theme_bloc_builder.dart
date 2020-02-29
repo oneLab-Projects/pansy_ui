@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../bloc.dart';
 
 /// [ThemeBlocBuilder] является виджетом, содержавший в себе Provider и Builder
@@ -10,9 +11,10 @@ class ThemeBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ThemeProvider(
+    return Provider<ThemeBloc>(
+      create: (context) => ThemeBloc(),
       child: StreamBuilder(
-        stream: ThemeProvider.of(context).theme,
+        stream: Provider.of<ThemeBloc>(context).theme,
         builder: (context, AsyncSnapshot<ThemeData> snapshot) {
           return builder(context, snapshot.data);
         },

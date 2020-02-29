@@ -14,12 +14,12 @@ class AggregateData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LocalizationsBlocBuilder(
-      builder: (context, locale, supportedLocales, localizationsDelegates) {
+      builder: (lBBContext, locale, supportedLocales, localizationsDelegates) {
         return ThemeBlocBuilder(
-          builder: (context, themeData) {
+          builder: (tBBContext, themeData) {
             AggregateDataModel initData = AggregateDataModel(
                 themeData, locale, supportedLocales, localizationsDelegates);
-            return builder(context, initData);
+            return builder(tBBContext, initData);
           },
         );
       },

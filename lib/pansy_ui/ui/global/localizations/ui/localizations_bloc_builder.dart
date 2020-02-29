@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import '../bloc/bloc.dart';
 import '../localizations_delegates.dart';
 
@@ -15,9 +16,10 @@ class LocalizationsBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LocalizationsProvider(
+    return Provider<LocalizationsBloc>(
+      create: (_) => LocalizationsBloc(),
       child: StreamBuilder(
-        stream: LocalizationsProvider.of(context).locale,
+        stream: Provider.of<LocalizationsBloc>(context).locale,
         builder: (context, AsyncSnapshot<Locale> snapshot) {
           return builder(
             context,
