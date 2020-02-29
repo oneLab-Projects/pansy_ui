@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:pansy_ui/pansy_ui.dart';
 import 'package:pansy_ui/pansy_ui/ui/global/bloc.dart';
+import 'package:provider/provider.dart';
 import '../app_localizations.dart';
 import '../localizations_delegates.dart';
 
@@ -93,6 +94,7 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
     bool checked, {
     bool enabled = true,
   }) {
+    var bloc = Provider.of<LocalizationsBloc>(context);
     return InkWell(
       onTap: () {
         if (!enabled || checked) return;
@@ -100,7 +102,7 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
         String result = supportedLanguages.keys
             .firstWhere((key) => supportedLanguages[key] == title);
 
-        LocalizationsProvider.of(context).changeLocale(Locale(result));
+        bloc.changeLocale(Locale(result));
       },
       child: ConstrainedBox(
         constraints: BoxConstraints(minHeight: 55),
