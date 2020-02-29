@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'localizations/ui/locale_bloc_builder.dart';
+
+import 'localizations/ui/localization_bloc_builder.dart';
 import 'theme/ui/theme_bloc_builder.dart';
 
 /// [AggregateData] является виджетом, цель которого – предоставить данные
@@ -11,14 +12,14 @@ class AggregateData extends StatelessWidget {
   AggregateData({@required this.builder}) : assert(builder != null);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext ctx) {
     return LocaleBlocBuilder(
-      builder: (lBBContext, locale, supportedLocales, localizationsDelegates) {
+      builder: (context, locale, supportedLocales, localizationsDelegates) {
         return ThemeBlocBuilder(
-          builder: (tBBContext, themeData) {
+          builder: (context, themeData) {
             AggregateDataModel initData = AggregateDataModel(
                 themeData, locale, supportedLocales, localizationsDelegates);
-            return builder(tBBContext, initData);
+            return builder(context, initData);
           },
         );
       },

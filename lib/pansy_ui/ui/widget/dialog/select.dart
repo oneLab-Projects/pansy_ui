@@ -44,28 +44,30 @@ class SelectionDialog extends StatelessWidget {
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(10),
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: SingleChildScrollView(
-                  child: Column(
-                      children: List.generate(
-                          actions.length,
-                          (int index) =>
-                              _buildActionItem(context, actions[index]))),
-                ),
-              ),
-              Divider(height: 1),
-              _buildActionItem(
-                  context,
-                  AppLocalizations.of(context).tr('default.cancel'),
-                  Colors.redAccent,
-                  false),
-            ],
-          ),
+          child: _buildContent(context),
         ),
       ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Flexible(
+          child: SingleChildScrollView(
+            child: Column(
+                children: List.generate(actions.length,
+                    (int index) => _buildActionItem(context, actions[index]))),
+          ),
+        ),
+        Divider(height: 1),
+        _buildActionItem(
+            context,
+            AppLocalizations.of(context).tr('default.cancel'),
+            Colors.redAccent,
+            false),
+      ],
     );
   }
 

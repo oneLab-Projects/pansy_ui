@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pansy_ui/pansy_ui/design/style.dart';
+import 'package:pansy_ui/pansy_ui.dart';
 
 /// Хранит [ThemeData] в стиле дневной темы приложения.
 final ThemeData dayTheme = ThemeData(

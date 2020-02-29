@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:native_device_orientation/native_device_orientation.dart';
 
 import 'package:pansy_ui/pansy_ui.dart';
-import 'package:pansy_ui/pansy_ui/widget/navigator/route_navigator.dart';
 import 'animated_indexed_stack.dart';
 
 /// [UNestedTabModel] является моделью для представления вкладки,
@@ -133,27 +132,31 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
   }
 
   /// Создаёт вкладку.
-  Widget _buildNavigator(UNestedTabModel tab) => UNestedTab(
-        routes: widget.routes,
-        navigatorKey: tab._navigatorKey,
-        initPageBuilder: tab.initPageBuilder,
-      );
+  Widget _buildNavigator(UNestedTabModel tab) {
+    return UNestedTab(
+      routes: widget.routes,
+      navigatorKey: tab._navigatorKey,
+      initPageBuilder: tab.initPageBuilder,
+    );
+  }
 
   /// Создаёт нижнюю панель навигации.
-  Widget _buildBottomBar() => UBottomNavigationBar(
-        onTabSelected: (index) {
-          if (widget.onTap != null) widget.onTap(index);
-          FocusScope.of(context).unfocus();
-          setState(() => currentIndex = index);
-        },
-        items: widget.tabs
-            .map((tab) => UBottomNavigationBarItem(
-                  iconData: tab.iconData,
-                  selectedIconData: tab.selectedIconData,
-                  badge: tab.badge,
-                ))
-            .toList(),
-      );
+  Widget _buildBottomBar() {
+    return UBottomNavigationBar(
+      onTabSelected: (index) {
+        if (widget.onTap != null) widget.onTap(index);
+        FocusScope.of(context).unfocus();
+        setState(() => currentIndex = index);
+      },
+      items: widget.tabs
+          .map((tab) => UBottomNavigationBarItem(
+                iconData: tab.iconData,
+                selectedIconData: tab.selectedIconData,
+                badge: tab.badge,
+              ))
+          .toList(),
+    );
+  }
 }
 
 /// Создаёт вкладку, работающую с [UNestedNavigator]
@@ -169,15 +172,17 @@ class UNestedTab extends StatelessWidget {
   final Map<String, Widget> routes;
 
   @override
-  Widget build(BuildContext context) => Navigator(
-        key: navigatorKey,
-        observers: [HeroController()],
-        onGenerateRoute: (routeSettings) => routes != null
-            ? RouteNavigator.onGenerateRoute(
-                routeSettings, routes, initPageBuilder)
-            : UPageRoute(
-                builder: (context) => initPageBuilder(context),
-                settings: routeSettings,
-              ),
-      );
+  Widget build(BuildContext context) {
+    return Navigator(
+      key: navigatorKey,
+      observers: [HeroController()],
+      onGenerateRoute: (routeSettings) => routes != null
+          ? RouteNavigator.onGenerateRoute(
+              routeSettings, routes, initPageBuilder)
+          : UPageRoute(
+              builder: (context) => initPageBuilder(context),
+              settings: routeSettings,
+            ),
+    );
+  }
 }

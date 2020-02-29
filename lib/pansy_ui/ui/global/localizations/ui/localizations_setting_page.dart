@@ -1,7 +1,7 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pansy_ui/pansy_ui.dart';
+import 'package:pansy_ui/pansy_ui/ui/global/bloc.dart';
 import '../app_localizations.dart';
 import '../localizations_delegates.dart';
 
@@ -20,8 +20,10 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
   void initState() {
     super.initState();
     localizations.recommendedLocale().then(
-          (value) => setState(() => locale = value),
-        );
+      (value) {
+        setState(() => locale = value);
+      },
+    );
   }
 
   @override
@@ -71,55 +73,55 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
   Widget _getAllAppLanguages(
     BuildContext context,
     Map<String, String> supportedLanguages,
-  ) =>
-      Column(
-        children: List.generate(supportedLanguages.length, (int index) {
-          bool checked = Localizations.localeOf(context).languageCode ==
-              supportedLanguages.keys.toList()[index];
-          return _buildWidget(
-            context,
-            supportedLanguages.values.toList()[index],
-            checked,
-          );
-        }),
-      );
+  ) {
+    return Column(
+      children: List.generate(supportedLanguages.length, (int index) {
+        bool checked = Localizations.localeOf(context).languageCode ==
+            supportedLanguages.keys.toList()[index];
+        return _buildWidget(
+          context,
+          supportedLanguages.values.toList()[index],
+          checked,
+        );
+      }),
+    );
+  }
 
   Widget _buildWidget(
     BuildContext context,
     String title,
     bool checked, {
     bool enabled = true,
-  }) =>
-      InkWell(
-        onTap: () {
-          if (!enabled || checked) return;
-          var supportedLanguages = localizations.supportedLanguages;
-          String result = supportedLanguages.keys
-              .firstWhere((key) => supportedLanguages[key] == title);
+  }) {
+    return InkWell(
+      onTap: () {
+        if (!enabled || checked) return;
+        var supportedLanguages = localizations.supportedLanguages;
+        String result = supportedLanguages.keys
+            .firstWhere((key) => supportedLanguages[key] == title);
 
-          BlocProvider.of<LocalizationsBloc>(context).add(
-            LocaleChanged(locale: Locale(result)),
-          );
-        },
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: 55),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.button.copyWith(
-                          color: Theme.of(context).textTheme.button.color,
-                        ),
-                  ),
+        LocalizationsProvider.of(context).changeLocale(Locale(result));
+      },
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minHeight: 55),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.button.copyWith(
+                        color: Theme.of(context).textTheme.button.color,
+                      ),
                 ),
-                if (checked) Icon(Icons.check),
-              ],
-            ),
+              ),
+              if (checked) Icon(Icons.check),
+            ],
           ),
         ),
-      );
+      ),
+    );
+  }
 }
