@@ -5,7 +5,7 @@ import '../localizations_delegates.dart';
 
 /// [LocalizationsBlocBuilder] является виджетом, содержавший в себе Provider и Builder
 /// BLoC, предназначенного для смены локализации приложения.
-class LocalizationsBlocBuilder extends StatelessWidget {
+class LocalizationsBlocBuilder extends StatefulWidget {
   final Widget Function(
       BuildContext context,
       Locale locale,
@@ -15,6 +15,21 @@ class LocalizationsBlocBuilder extends StatelessWidget {
   LocalizationsBlocBuilder({@required this.builder}) : assert(builder != null);
 
   @override
+  _LocalizationsBlocBuilderState createState() =>
+      _LocalizationsBlocBuilderState();
+}
+
+class _LocalizationsBlocBuilderState extends State<LocalizationsBlocBuilder> {
+  List<Locale> _locales;
+
+  @override
+  void initState() {
+    super.initState();
+    LocalizationsDelegates.getSupportedLocales(context)
+        .then((value) => _locales = value.keys.toList());
+  }
+
+  @override
   Widget build(BuildContext context) {
     var bloc = LocalizationsBloc(context);
     return ProxyProvider0<LocalizationsBloc>(
@@ -22,10 +37,10 @@ class LocalizationsBlocBuilder extends StatelessWidget {
       child: StreamBuilder(
         stream: bloc.locale,
         builder: (context, AsyncSnapshot<Locale> snapshot) {
-          return builder(
+          return widget.builder(
             context,
             snapshot.data,
-            LocalizationsDelegates.instance.supportedLocales,
+            _locales,
             LocalizationsDelegates.instance.localizationsDelegates,
           );
         },

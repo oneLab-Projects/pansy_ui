@@ -63,12 +63,10 @@ class LocalizationsDelegates {
     _supportedLocales ??= await getSupportedLocales(context);
     Locale locale = (await Devicelocale.currentLocale).toLocale();
 
-    return _supportedLocales.containsKey(locale) ? locale : _supportedLocales;
+    return _supportedLocales.containsKey(locale) ? locale : Locale('en');
   }
 
-  bool isSupported(Locale locale) {
-    return _supportedLocales.containsKey(locale);
-  }
+  bool isSupported(Locale locale) => _supportedLocales.containsKey(locale);
 
   static LocalizationsDelegates get instance {
     _instance ??= LocalizationsDelegates();
@@ -78,6 +76,5 @@ class LocalizationsDelegates {
   List<LocalizationsDelegate> get localizationsDelegates =>
       _localizationsDelegates;
 
-  List<Locale> get supportedLocales => _supportedLocales.keys.toList();
   Map<Locale, String> get supportedLocalesWithName => _supportedLocales;
 }
