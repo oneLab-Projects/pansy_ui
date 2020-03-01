@@ -15,12 +15,12 @@ class LocalizationsSettingPage extends StatefulWidget {
 
 class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
   LocalizationsDelegates localizations = LocalizationsDelegates.instance;
-  String locale = 'loading';
+  Locale locale = Locale(null);
 
   @override
   void initState() {
     super.initState();
-    localizations.recommendedLocale().then(
+    localizations.recommendedLocale(context).then(
       (value) {
         setState(() => locale = value);
       },
@@ -29,7 +29,7 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    var supportedLanguages = localizations.supportedLanguages;
+    var supportedLocalesWithName = localizations.supportedLocalesWithName;
     return UScaffold(
       title: AppLocalizations.of(context).tr('settings.localizations.title'),
       body: Column(
@@ -38,14 +38,14 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
             AppLocalizations.of(context)
                 .tr('settings.localizations.recommended'),
             variant: true,
-            child: _getRecommendedLanguages(context, supportedLanguages),
+            child: _getRecommendedLanguages(context, supportedLocalesWithName),
           ),
           Divider(),
           UListContent(
             AppLocalizations.of(context)
                 .tr('settings.localizations.all_languages'),
             variant: true,
-            child: _getAllAppLanguages(context, supportedLanguages),
+            child: _getAllAppLanguages(context, supportedLocalesWithName),
           ),
         ],
       ),
@@ -55,17 +55,23 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
   /// Получает рекомендованные языки.
   Widget _getRecommendedLanguages(
     BuildContext context,
-    Map<String, String> supportedLanguages,
+    Map<Locale, String> supportedLocalesWithName,
   ) {
     return Column(
       children: <Widget>[
-        if (locale != 'en' && locale != 'loading')
-          _buildWidget(context, supportedLanguages[locale],
-              Localizations.localeOf(context).languageCode == locale),
-        if (locale == 'loading')
+        if (locale != Locale('en') && locale != Locale(null))
+          _buildWidget(
+            context,
+            supportedLocalesWithName[locale],
+            Localizations.localeOf(context) == locale,
+          ),
+        if (locale == Locale(null))
           _buildWidget(context, "Loading", false, enabled: false),
-        _buildWidget(context, supportedLanguages['en'],
-            Localizations.localeOf(context).languageCode == 'en'),
+        _buildWidget(
+          context,
+          supportedLocalesWithName[Locale('en')],
+          Localizations.localeOf(context) == Locale('en'),
+        ),
       ],
     );
   }
@@ -73,15 +79,15 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
   /// Получает все языки, поддерживаемые приложением.
   Widget _getAllAppLanguages(
     BuildContext context,
-    Map<String, String> supportedLanguages,
+    Map<Locale, String> supportedLocalesWithName,
   ) {
     return Column(
-      children: List.generate(supportedLanguages.length, (int index) {
-        bool checked = Localizations.localeOf(context).languageCode ==
-            supportedLanguages.keys.toList()[index];
+      children: List.generate(supportedLocalesWithName.length, (int index) {
+        bool checked = Localizations.localeOf(context) ==
+            supportedLocalesWithName.keys.toList()[index];
         return _buildWidget(
           context,
-          supportedLanguages.values.toList()[index],
+          supportedLocalesWithName.values.toList()[index],
           checked,
         );
       }),
@@ -98,11 +104,11 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
     return InkWell(
       onTap: () {
         if (!enabled || checked) return;
-        var supportedLanguages = localizations.supportedLanguages;
-        String result = supportedLanguages.keys
-            .firstWhere((key) => supportedLanguages[key] == title);
+        var supportedLocalesWithName = localizations.supportedLocalesWithName;
+        Locale result = supportedLocalesWithName.keys
+            .firstWhere((key) => supportedLocalesWithName[key] == title);
 
-        bloc.changeLocale(Locale(result));
+        bloc.changeLocale(result);
       },
       child: ConstrainedBox(
         constraints: BoxConstraints(minHeight: 55),

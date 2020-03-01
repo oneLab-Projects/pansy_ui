@@ -16,7 +16,7 @@ class LocalizationsBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var bloc = LocalizationsBloc();
+    var bloc = LocalizationsBloc(context);
     return ProxyProvider0<LocalizationsBloc>(
       update: (_, __) => bloc,
       child: StreamBuilder(

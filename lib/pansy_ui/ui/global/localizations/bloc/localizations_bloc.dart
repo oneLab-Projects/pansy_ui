@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../localizations_delegates.dart';
 
@@ -13,12 +14,12 @@ class LocalizationsBloc {
   BehaviorSubject<Locale> _subjectLocale;
   Locale _locale = Locale('en');
 
-  LocalizationsBloc() {
-    _subjectLocale = BehaviorSubject<Locale>.seeded(this._locale);
-    _loadSettings();
+  LocalizationsBloc(BuildContext context) {
+    _subjectLocale = BehaviorSubject<Locale>.seeded(_locale);
+    _loadSettings(context);
   }
 
-  /// Возвращает поток, содержащий информацию о заданной в приложении локализации.
+  /// Возвращает поток заданной в приложении локализации.
   Stream<Locale> get locale => _subjectLocale.stream;
 
   /// Задаёт локализацию приложения.
@@ -28,19 +29,19 @@ class LocalizationsBloc {
   }
 
   /// Загружает настройки локализации.
-  void _loadSettings() async {
-    if (_preferences == null)
-      _preferences = await SharedPreferences.getInstance();
-    String languageCode = _preferences.getString(_LOCALE) ??
-        (await LocalizationsDelegates.instance.recommendedLocale());
-    _subjectLocale.sink.add(Locale(languageCode));
+  void _loadSettings(BuildContext context) async {
+    _preferences ??= await SharedPreferences.getInstance();
+    Locale locale = (_preferences.getString(_LOCALE) ??
+            (await LocalizationsDelegates.instance.recommendedLocale(context)))
+        .toString()
+        .toLocale();
+    _subjectLocale.sink.add(locale);
   }
 
   /// Сохраняет настройки локализации.
   Future _saveSettings(Locale locale) async {
-    if (_preferences == null)
-      _preferences = await SharedPreferences.getInstance();
-    await _preferences.setString(_LOCALE, locale.languageCode);
+    _preferences ??= await SharedPreferences.getInstance();
+    await _preferences.setString(_LOCALE, locale.toLanguageTag());
   }
 
   void dispose() => _subjectLocale.close();
