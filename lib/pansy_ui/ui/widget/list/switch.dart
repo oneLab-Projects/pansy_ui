@@ -4,19 +4,19 @@ import 'package:pansy_ui/pansy_ui.dart';
 /// Создаёт переключатель, предназначенный для отображения
 /// в списке.
 class UListSwitch extends StatefulWidget {
-  UListSwitch(
-    this.caption, {
-    this.description,
-    this.iconData,
-    this.onChanged,
-    @required this.value,
-  });
-
   final String caption;
   final String description;
   final IconData iconData;
   final Function(bool) onChanged;
   final bool value;
+
+  UListSwitch(
+    this.caption, {
+    this.description,
+    this.iconData,
+    @required this.onChanged,
+    @required this.value,
+  }) : assert(value != null);
 
   @override
   _UListSwitchState createState() => _UListSwitchState();

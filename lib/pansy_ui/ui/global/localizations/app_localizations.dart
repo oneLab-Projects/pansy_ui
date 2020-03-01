@@ -8,8 +8,8 @@ import 'localizations_delegates.dart';
 
 /// [AppLocalizations] предназначен для работы с мультиязычностью приложения.
 class AppLocalizations {
-  AppLocalizations(this.locale);
   final Locale locale;
+  AppLocalizations(this.locale);
 
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
@@ -22,13 +22,13 @@ class AppLocalizations {
 
   /// Загружает локализацию из директории, указанной по умолчанию.
   Future<bool> load() async {
-    String data = await rootBundle
-        .loadString('resources/lang/${locale.languageCode}.json');
-    Map<String, dynamic> _result = json.decode(data);
+    String localeData = await rootBundle
+        .loadString('resources/lang/${locale.toLanguageTag()}.json');
+    Map<String, dynamic> _result = json.decode(localeData);
 
-    this._sentences = new Map();
+    _sentences = Map();
     _result.forEach((String key, dynamic value) {
-      this._sentences[key] = value;
+      _sentences[key] = value;
     });
 
     return true;
@@ -36,7 +36,7 @@ class AppLocalizations {
 
   /// Получает строку на основе проинициализированной локализации.
   String tr(String key, {List<String> args}) {
-    String res = this._resolve(key, this._sentences);
+    String res = _resolve(key, _sentences);
     if (args != null) {
       args.forEach((String str) {
         res = res.replaceFirst(RegExp(r'{}'), str);
@@ -76,7 +76,7 @@ class _AppLocalizationsDelegate
   /// Загружает указанную локализацию.
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations localizations = new AppLocalizations(locale);
+    AppLocalizations localizations = AppLocalizations(locale);
     await localizations.load();
     return localizations;
   }

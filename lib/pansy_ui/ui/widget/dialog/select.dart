@@ -22,7 +22,8 @@ Future<String> showSelectionDialog<String>(BuildContext context,
 /// Диалог выбора. Вызывается методом `showSelectionDialog`
 class SelectionDialog extends StatelessWidget {
   final List<dynamic> actions;
-  SelectionDialog({this.actions});
+
+  SelectionDialog({@required this.actions}) : assert(actions != null);
 
   @override
   Widget build(BuildContext context) {

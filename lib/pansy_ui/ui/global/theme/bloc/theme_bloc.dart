@@ -15,7 +15,7 @@ class ThemeBloc {
   ThemeData _theme = dayTheme;
 
   ThemeBloc() {
-    _subjectNightTheme = BehaviorSubject<ThemeData>.seeded(this._theme);
+    _subjectNightTheme = BehaviorSubject<ThemeData>.seeded(_theme);
     _loadSettings();
   }
 
@@ -44,16 +44,14 @@ class ThemeBloc {
 
   /// Загружает настройки темы.
   void _loadSettings() async {
-    if (_preferences == null)
-      _preferences = await SharedPreferences.getInstance();
+    _preferences ??= await SharedPreferences.getInstance();
     bool value = _preferences.getBool(_NIGHT_THEME) ?? false;
     setNightTheme(value);
   }
 
   /// Сохраняет настройки темы.
   Future _saveSettings(bool nightTheme) async {
-    if (_preferences == null)
-      _preferences = await SharedPreferences.getInstance();
+    _preferences ??= await SharedPreferences.getInstance();
     await _preferences.setBool(_NIGHT_THEME, nightTheme);
   }
 

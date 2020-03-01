@@ -7,6 +7,15 @@ enum ContentCardVariant { mini, nano }
 
 /// Создаёт карточку, предназначенную для работы с тематическими сборниками.
 class ContentCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final ImageProvider image;
+  final String urlImage;
+  final Color textColor;
+  final double height;
+  final double width;
+  final ContentCardVariant variant;
+
   ContentCard({
     this.title,
     this.description,
@@ -17,15 +26,6 @@ class ContentCard extends StatelessWidget {
     this.width,
     this.variant,
   }) : assert(image == null || urlImage == null);
-
-  final String title;
-  final String description;
-  final ImageProvider image;
-  final String urlImage;
-  final Color textColor;
-  final double height;
-  final double width;
-  final ContentCardVariant variant;
 
   @override
   Widget build(BuildContext context) {

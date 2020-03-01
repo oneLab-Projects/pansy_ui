@@ -6,28 +6,29 @@ import 'package:native_device_orientation/native_device_orientation.dart';
 /// Создаёт элемент нижней панели навигации. Так же принимает
 /// `badge` для отображения статуса непрочитанной информации.
 class UBottomNavigationBarItem {
+  IconData iconData;
+  IconData selectedIconData;
+  bool badge;
+
   UBottomNavigationBarItem({
     @required this.iconData,
     this.selectedIconData,
     this.badge = false,
   }) : assert(iconData != null);
-  IconData iconData;
-  IconData selectedIconData;
-  bool badge;
 }
 
 /// Создаёт нижнюю панель навигации. Так же принимает `body` для
 /// правильной координации при изменении ориентации устройства.
 class UBottomNavigationBar extends StatefulWidget {
+  final List<UBottomNavigationBarItem> items;
+  final double iconSize;
+  final ValueChanged<int> onTabSelected;
+
   UBottomNavigationBar({
     @required this.items,
     this.iconSize: 24,
     this.onTabSelected,
   }) : assert(items != null);
-
-  final List<UBottomNavigationBarItem> items;
-  final double iconSize;
-  final ValueChanged<int> onTabSelected;
 
   static const double heightNavigationBarVertical = 50;
   static const double weightNavigationBarHorisontal = 60;

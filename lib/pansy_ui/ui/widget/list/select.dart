@@ -4,19 +4,19 @@ import 'package:pansy_ui/pansy_ui.dart';
 /// Создаёт виджет выбора, предназначенный для отображения
 /// в списке.
 class UListSelect extends StatelessWidget {
-  UListSelect(
-    this.caption, {
-    this.description,
-    this.value,
-    this.iconData,
-    this.onPressed,
-  });
-
   final String caption;
   final String description;
   final String value;
   final IconData iconData;
   final Function onPressed;
+
+  UListSelect(
+    this.caption, {
+    this.description,
+    @required this.value,
+    this.iconData,
+    @required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {

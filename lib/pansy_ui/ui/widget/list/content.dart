@@ -4,6 +4,14 @@ import 'package:flutter/material.dart';
 /// так и заголовком для содержимого, в зависимости от
 /// заданного параметра `variant` (по умолчанию – кнопка).
 class UListContent extends StatelessWidget {
+  final String caption;
+  final String description;
+  final IconData iconData;
+  final Function onPressed;
+  final Function onLongPress;
+  final Widget child;
+  final bool variant;
+
   UListContent(
     this.caption, {
     this.description,
@@ -13,14 +21,6 @@ class UListContent extends StatelessWidget {
     @required this.child,
     this.variant = false,
   });
-
-  final String caption;
-  final String description;
-  final IconData iconData;
-  final Function onLongPress;
-  final Function onPressed;
-  final Widget child;
-  final bool variant;
 
   @override
   Widget build(BuildContext context) {

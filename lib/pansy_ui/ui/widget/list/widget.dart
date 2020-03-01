@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 /// [UListWidget] является обёрткой для виджетов, отображаемых
 /// в списках.
 class UListWidget extends StatelessWidget {
+  final String caption;
+  final String description;
+  final IconData iconData;
+  final Function onPressed;
+  final Function onLongPress;
+  final Widget control;
+
   UListWidget(
     this.caption, {
     this.description,
     this.iconData,
-    this.onPressed,
+    @required this.onPressed,
     this.onLongPress,
     this.control,
   });
-
-  final String caption;
-  final String description;
-  final IconData iconData;
-  final Function onLongPress;
-  final Function onPressed;
-  final Widget control;
 
   @override
   Widget build(BuildContext context) {

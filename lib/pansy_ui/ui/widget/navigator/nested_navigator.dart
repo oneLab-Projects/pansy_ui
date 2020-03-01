@@ -161,15 +161,15 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
 
 /// Создаёт вкладку, работающую с [UNestedNavigator]
 class UNestedTab extends StatelessWidget {
+  final GlobalKey<NavigatorState> navigatorKey;
+  final WidgetBuilder initPageBuilder;
+  final Map<String, Widget> routes;
+
   UNestedTab({
     @required this.navigatorKey,
     @required this.initPageBuilder,
     @required this.routes,
   });
-
-  final GlobalKey<NavigatorState> navigatorKey;
-  final WidgetBuilder initPageBuilder;
-  final Map<String, Widget> routes;
 
   @override
   Widget build(BuildContext context) {

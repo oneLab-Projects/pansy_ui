@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 
 /// Создаёт приподнятую кнопку.
 class URaisedButton extends StatelessWidget {
+  final String text;
+  final IconData iconData;
+  final Function onPressed;
+  final Function onLongPress;
+  final bool loading;
+
   URaisedButton(
     this.text, {
     this.iconData,
-    this.onPressed,
+    @required this.onPressed,
     this.onLongPress,
     this.loading = false,
   });
-
-  final IconData iconData;
-  final bool loading;
-  final Function onLongPress;
-  final Function onPressed;
-  final String text;
 
   @override
   Widget build(BuildContext context) {

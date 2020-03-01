@@ -17,10 +17,15 @@ Future<void> showScaffoldSheet(BuildContext context, {Widget child}) {
 
 /// Диалог выбора. Вызывается методом `showSelectionDialog`
 class ScaffoldSheet extends StatelessWidget {
-  ScaffoldSheet({this.child, this.title, this.description});
-  final Widget child;
   final String title;
   final String description;
+  final Widget child;
+
+  ScaffoldSheet({
+    this.title,
+    this.description,
+    @required this.child,
+  }) : assert(child != null);
 
   @override
   Widget build(BuildContext context) {

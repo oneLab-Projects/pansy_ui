@@ -6,6 +6,11 @@ import 'package:pansy_ui/pansy_ui.dart';
 
 /// Создает визуальную основу для виджетов.
 class UScaffold extends StatefulWidget {
+  final String title;
+  final Widget body;
+  final bool blurBackground;
+  final bool showBackButton;
+
   UScaffold({
     this.title,
     @required this.body,
@@ -13,10 +18,6 @@ class UScaffold extends StatefulWidget {
     this.showBackButton = true,
   }) : assert(body != null);
 
-  final String title;
-  final Widget body;
-  final bool blurBackground;
-  final bool showBackButton;
   static const double titleHeight = 60;
 
   @override
@@ -258,8 +259,7 @@ class CustomScrollController extends ScrollController {
 
   void jumpToWithoutGoingIdleAndKeepingBallistic(double value) {
     assert(positions.isNotEmpty, 'ScrollController not attached.');
-    for (_SilentScrollPosition position
-        in new List<ScrollPosition>.from(positions))
+    for (_SilentScrollPosition position in List<ScrollPosition>.from(positions))
       position.jumpToWithoutGoingIdleAndKeepingBallistic(value);
   }
 }
