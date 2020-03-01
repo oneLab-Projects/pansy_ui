@@ -20,7 +20,7 @@ class LocalizationsBlocBuilder extends StatefulWidget {
 }
 
 class _LocalizationsBlocBuilderState extends State<LocalizationsBlocBuilder> {
-  List<Locale> _locales;
+  List<Locale> _locales = [Locale('en')];
 
   @override
   void initState() {
