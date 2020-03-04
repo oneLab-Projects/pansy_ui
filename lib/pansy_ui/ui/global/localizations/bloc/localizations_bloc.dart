@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:pansy_ui/pansy_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../localizations_delegates.dart';
 
 import 'package:rxdart/rxdart.dart';
 
@@ -13,14 +13,19 @@ class LocalizationsBloc {
 
   BehaviorSubject<Locale> _subjectLocale;
   Locale _locale = Locale('en');
+  Map<Locale, String> _supportedLocales;
 
   LocalizationsBloc(BuildContext context) {
     _subjectLocale = BehaviorSubject<Locale>.seeded(_locale);
+    _loadSupportLocales(context);
     _loadSettings(context);
   }
 
   /// Возвращает поток заданной в приложении локализации.
   Stream<Locale> get locale => _subjectLocale.stream;
+
+  /// Возвращает поддерживаемые локализации.
+  Map<Locale, String> get supportedLocales => _supportedLocales;
 
   /// Задаёт локализацию приложения.
   void changeLocale(Locale locale) {
@@ -28,13 +33,20 @@ class LocalizationsBloc {
     _saveSettings(locale);
   }
 
+  /// Загружает список поддерживаемых языков.
+  void _loadSupportLocales(BuildContext context) async {
+    _supportedLocales =
+        await LocalizationsDelegates.getSupportedLocales(context);
+  }
+
   /// Загружает настройки локализации.
   void _loadSettings(BuildContext context) async {
     _preferences ??= await SharedPreferences.getInstance();
     Locale locale = (_preferences.getString(_LOCALE) ??
-            (await LocalizationsDelegates.instance.recommendedLocale(context)))
+            (await LocalizationsDelegates.getInstance(context)
+                .recommendedLocale(context)))
         .toString()
-        .toLocale();
+        .toLocale;
     _subjectLocale.sink.add(locale);
   }
 

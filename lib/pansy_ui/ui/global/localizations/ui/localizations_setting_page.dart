@@ -14,22 +14,23 @@ class LocalizationsSettingPage extends StatefulWidget {
 }
 
 class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
-  LocalizationsDelegates localizations = LocalizationsDelegates.instance;
-  Locale locale = Locale(null);
+  LocalizationsDelegates _localizations;
+  Locale _locale = Locale(null);
 
   @override
   void initState() {
     super.initState();
-    localizations.recommendedLocale(context).then(
+    _localizations = LocalizationsDelegates.getInstance(context);
+    _localizations.recommendedLocale(context).then(
       (value) {
-        setState(() => locale = value);
+        setState(() => _locale = value);
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    var supportedLocalesWithName = localizations.supportedLocalesWithName;
+    var supportedLocalesWithName = _localizations.supportedLocalesWithName;
     return UScaffold(
       title: AppLocalizations.of(context).tr('settings.localizations.title'),
       body: Column(
@@ -59,13 +60,13 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
   ) {
     return Column(
       children: <Widget>[
-        if (locale != Locale('en') && locale != Locale(null))
+        if (_locale != Locale('en') && _locale != Locale(null))
           _buildWidget(
             context,
-            supportedLocalesWithName[locale],
-            Localizations.localeOf(context) == locale,
+            supportedLocalesWithName[_locale],
+            Localizations.localeOf(context) == _locale,
           ),
-        if (locale == Locale(null))
+        if (_locale == Locale(null))
           _buildWidget(context, "Loading", false, enabled: false),
         _buildWidget(
           context,
@@ -104,7 +105,7 @@ class _LocalizationsSettingPageState extends State<LocalizationsSettingPage> {
     return InkWell(
       onTap: () {
         if (!enabled || checked) return;
-        var supportedLocalesWithName = localizations.supportedLocalesWithName;
+        var supportedLocalesWithName = _localizations.supportedLocalesWithName;
         Locale result = supportedLocalesWithName.keys
             .firstWhere((key) => supportedLocalesWithName[key] == title);
 

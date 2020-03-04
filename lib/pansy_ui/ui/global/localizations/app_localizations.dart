@@ -69,8 +69,8 @@ class _AppLocalizationsDelegate
 
   /// Возвращает true, если локализация поддерживатся в приложении.
   @override
-  bool isSupported(Locale locale) {
-    return LocalizationsDelegates.instance.isSupported(locale);
+  bool isSupported(Locale locale, [BuildContext context]) {
+    return LocalizationsDelegates.getInstance(context).isSupported(locale);
   }
 
   /// Загружает указанную локализацию.

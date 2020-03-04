@@ -4,19 +4,18 @@ import 'package:devicelocale/devicelocale.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pansy_ui/pansy_ui.dart';
+import 'package:provider/provider.dart';
 
 import 'app_localizations.dart';
 
-extension StringToLocale on String {
-  Locale toLocale() {
-    RegExp localeTags = RegExp(r'^([a-z]{2})((-|_)([A-Z]{2}))?$');
-    RegExpMatch match = localeTags.firstMatch(this);
-    return Locale(match.group(1), match.group(4));
-  }
-}
-
-/// Фабрика для набора локализованных ресурсов типа T, загружаемых виджетом [AppLocalizations].
+/// Фабрика для набора локализованных ресурсов, загружаемых виджетом [AppLocalizations].
 class LocalizationsDelegates {
+  LocalizationsDelegates(BuildContext context) {
+    _supportedLocales =
+        Provider.of<LocalizationsBloc>(context).supportedLocales;
+  }
+
   static LocalizationsDelegates _instance;
 
   /// Хранит перечисление поддерживаемых локалей в формате `locale`: `locale_name`.
@@ -61,20 +60,21 @@ class LocalizationsDelegates {
   /// основываясь на локализации устройства.
   Future<Locale> recommendedLocale(BuildContext context) async {
     _supportedLocales ??= await getSupportedLocales(context);
-    Locale locale = (await Devicelocale.currentLocale).toLocale();
+    Locale locale = (await Devicelocale.currentLocale).toLocale;
 
     return _supportedLocales.containsKey(locale) ? locale : Locale('en');
   }
 
   bool isSupported(Locale locale) => _supportedLocales.containsKey(locale);
 
-  static LocalizationsDelegates get instance {
-    _instance ??= LocalizationsDelegates();
+  static LocalizationsDelegates getInstance(BuildContext context) {
+    _instance ??= LocalizationsDelegates(context);
     return _instance;
   }
 
   List<LocalizationsDelegate> get localizationsDelegates =>
       _localizationsDelegates;
 
+  List<Locale> get supportedLocales => _supportedLocales.keys.toList();
   Map<Locale, String> get supportedLocalesWithName => _supportedLocales;
 }

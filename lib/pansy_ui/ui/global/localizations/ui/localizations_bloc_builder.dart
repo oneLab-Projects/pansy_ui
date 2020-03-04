@@ -5,29 +5,15 @@ import '../localizations_delegates.dart';
 
 /// [LocalizationsBlocBuilder] является виджетом, содержавший в себе Provider и Builder
 /// BLoC, предназначенного для смены локализации приложения.
-class LocalizationsBlocBuilder extends StatefulWidget {
+class LocalizationsBlocBuilder extends StatelessWidget {
   final Widget Function(
-      BuildContext context,
-      Locale locale,
-      List<Locale> supportedLocales,
-      List<LocalizationsDelegate> localizationsDelegates) builder;
+    BuildContext context,
+    Locale locale,
+    List<Locale> supportedLocales,
+    List<LocalizationsDelegate<dynamic>> localizationsDelegates,
+  ) builder;
 
   LocalizationsBlocBuilder({@required this.builder}) : assert(builder != null);
-
-  @override
-  _LocalizationsBlocBuilderState createState() =>
-      _LocalizationsBlocBuilderState();
-}
-
-class _LocalizationsBlocBuilderState extends State<LocalizationsBlocBuilder> {
-  List<Locale> _locales = [Locale('en')];
-
-  @override
-  void initState() {
-    super.initState();
-    LocalizationsDelegates.getSupportedLocales(context)
-        .then((value) => _locales = value.keys.toList());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +23,13 @@ class _LocalizationsBlocBuilderState extends State<LocalizationsBlocBuilder> {
       child: StreamBuilder(
         stream: bloc.locale,
         builder: (context, AsyncSnapshot<Locale> snapshot) {
-          return widget.builder(
+          var localizationsDelegates =
+              LocalizationsDelegates.getInstance(context);
+          return builder(
             context,
             snapshot.data,
-            _locales,
-            LocalizationsDelegates.instance.localizationsDelegates,
+            localizationsDelegates.supportedLocales,
+            localizationsDelegates.localizationsDelegates,
           );
         },
       ),
