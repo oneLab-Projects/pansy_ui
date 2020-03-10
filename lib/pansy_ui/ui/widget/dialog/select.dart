@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:pansy_ui/pansy_ui.dart';
-
 /// Отображает диалог выбора.
 /// ```dart
 /// showSelectionDialog(
@@ -65,7 +63,7 @@ class SelectionDialog extends StatelessWidget {
         Divider(height: 1),
         _buildActionItem(
             context,
-            AppLocalizations.of(context).tr('default.cancel'),
+            MaterialLocalizations.of(context).cancelButtonLabel,
             Colors.redAccent,
             false),
       ],

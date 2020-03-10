@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pansy_ui/pansy_ui.dart';
 
@@ -24,7 +25,6 @@ class UListSelect extends StatelessWidget {
         iconData: iconData,
         onPressed: onPressed,
         description: description,
-        control: Text(
-            value ?? AppLocalizations.of(context).tr('default.not_selected')));
+        control: Text(value));
   }
 }
