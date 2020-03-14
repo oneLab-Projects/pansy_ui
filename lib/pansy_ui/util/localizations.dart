@@ -37,10 +37,10 @@ class LocalizationTools {
 
   /// Возвращает наиболее подходящий язык для пользователя,
   /// основываясь на локализации устройства.
-  Future<Locale> recommendedLocale(
+  static Future<Locale> recommendedLocale(
       BuildContext context, List<Locale> _supportedLocales) async {
     Locale locale = (await Devicelocale.currentLocale).toLocale();
 
-    return _supportedLocales.contains(locale) ? locale : Locale('en');
+    return _supportedLocales.contains(locale) ? locale : Locale('en', 'US');
   }
 }
