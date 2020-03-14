@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:devicelocale/devicelocale.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'extensions.dart';
@@ -32,5 +33,14 @@ class LocalizationTools {
       locales[locale] = localeName;
     }
     return locales;
+  }
+
+  /// Возвращает наиболее подходящий язык для пользователя,
+  /// основываясь на локализации устройства.
+  Future<Locale> recommendedLocale(
+      BuildContext context, List<Locale> _supportedLocales) async {
+    Locale locale = (await Devicelocale.currentLocale).toLocale();
+
+    return _supportedLocales.contains(locale) ? locale : Locale('en');
   }
 }
