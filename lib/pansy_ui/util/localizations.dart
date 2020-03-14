@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'extensions.dart';
 
-class ScanLocalizations {
+class LocalizationTools {
   /// Возвращает поддерживаемые локали приложением в формате `locale`: `locale_name`.
   static Future<Map<Locale, String>> getSupportedLocales(
     BuildContext context, [
