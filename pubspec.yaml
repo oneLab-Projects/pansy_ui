@@ -15,9 +15,7 @@ dependencies:
   transparent_image: ^1.0.0
 
   # localizations
-  flutter_localizations:
-    sdk: flutter
-  devicelocale: ^0.2.1
+  intl: ^0.16.1
 
   # bloc
   rxdart: ^0.23.1

@@ -1,22 +1,22 @@
 import 'dart:convert';
 
-import 'package:devicelocale/devicelocale.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'extensions.dart';
 
 class LocalizationTools {
   /// Возвращает поддерживаемые локали приложением в формате `locale`: `locale_name`.
   static Future<Map<Locale, String>> getSupportedLocales(
     BuildContext context, [
-    String directory = 'resources/lang/',
+    String path = 'resources/lang/',
   ]) async {
     String manifestContent =
         await DefaultAssetBundle.of(context).loadString('AssetManifest.json');
     Map<String, dynamic> manifestMap = json.decode(manifestContent);
 
     List<String> localesPaths = manifestMap.keys
-        .where((String key) => key.contains(directory))
+        .where((String key) => key.contains(path))
         .where((String key) => key.contains('.json'))
         .toList();
 
@@ -26,8 +26,8 @@ class LocalizationTools {
     for (String localesPath in localesPaths) {
       RegExpMatch match = localeFile.firstMatch(localesPath);
       Locale locale = Locale(match.group(1), match.group(3));
-      String localeData = await rootBundle
-          .loadString('$directory${locale.toLanguageTag()}.json');
+      String localeData =
+          await rootBundle.loadString('$path${locale.toLanguageTag()}.json');
 
       String localeName = json.decode(localeData)['language'];
       locales[locale] = localeName;
@@ -37,10 +37,9 @@ class LocalizationTools {
 
   /// Возвращает наиболее подходящий язык для пользователя,
   /// основываясь на локализации устройства.
-  static Future<Locale> recommendedLocale(
-      BuildContext context, List<Locale> _supportedLocales) async {
-    Locale locale = (await Devicelocale.currentLocale).toLocale();
+  static Locale recommendedLocale(List<Locale> supportedLocales) {
+    Locale locale = Intl.getCurrentLocale().toLocale();
 
-    return _supportedLocales.contains(locale) ? locale : Locale('en', 'US');
+    return supportedLocales.contains(locale) ? locale : Locale('en');
   }
 }
