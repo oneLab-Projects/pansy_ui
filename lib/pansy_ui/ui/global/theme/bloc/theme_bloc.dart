@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pansy_ui/pansy_ui/ui/global/bloc.dart';
-import 'package:pansy_ui/pansy_ui/ui/global/theme/data/day_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:rxdart/rxdart.dart';
@@ -10,23 +8,26 @@ import 'package:rxdart/rxdart.dart';
 class ThemeBloc {
   static const String _NIGHT_THEME = "ThemeBloc_NIGHT_THEME";
   SharedPreferences _preferences;
+  ThemeData _dayTheme;
+  ThemeData _nightTheme;
 
-  BehaviorSubject<ThemeData> _subjectNightTheme;
-  ThemeData _theme = dayTheme;
+  BehaviorSubject<ThemeData> _subjectTheme;
 
-  ThemeBloc() {
-    _subjectNightTheme = BehaviorSubject<ThemeData>.seeded(_theme);
+  ThemeBloc({ThemeData dayTheme, ThemeData nightTheme}) {
+    _dayTheme = dayTheme;
+    _nightTheme = nightTheme;
+
+    _subjectTheme = BehaviorSubject<ThemeData>.seeded(_dayTheme);
     _loadSettings();
   }
 
   /// Возвращает поток, содержащий информацию о заданной в приложении темы.
-  Stream<ThemeData> get theme => _subjectNightTheme.stream;
+  Stream<ThemeData> get theme => _subjectTheme.stream;
 
-  /// Переключает ночную тему приложения, а также стилизирует
-  /// StatusBar и SystemNavigationBar с помощью [SystemChrome].
-  void setNightTheme(bool value) {
-    ThemeData theme = value ? nightTheme : dayTheme;
-    _subjectNightTheme.sink.add(theme);
+  /// Задаёт, активирована ли ночная тема в приложении.
+  set activatedNightTheme(bool value) {
+    ThemeData theme = value ? _dayTheme : _nightTheme;
+    _subjectTheme.sink.add(theme);
     _saveSettings(value);
 
     SystemChrome.setSystemUIOverlayStyle(
@@ -40,20 +41,21 @@ class ThemeBloc {
     );
   }
 
-  bool isNightTheme() => _subjectNightTheme.value == nightTheme;
+  /// Возвращает, активирована ли ночная тема в приложении.
+  bool get isNightTheme => _subjectTheme.value == _nightTheme;
 
   /// Загружает настройки темы.
   void _loadSettings() async {
     _preferences ??= await SharedPreferences.getInstance();
     bool value = _preferences.getBool(_NIGHT_THEME) ?? false;
-    setNightTheme(value);
+    activatedNightTheme = value;
   }
 
   /// Сохраняет настройки темы.
-  Future _saveSettings(bool nightTheme) async {
+  void _saveSettings(bool nightTheme) async {
     _preferences ??= await SharedPreferences.getInstance();
     await _preferences.setBool(_NIGHT_THEME, nightTheme);
   }
 
-  void dispose() => _subjectNightTheme.close();
+  void dispose() => _subjectTheme.close();
 }
