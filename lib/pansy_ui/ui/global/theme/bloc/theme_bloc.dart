@@ -13,7 +13,8 @@ class ThemeBloc {
 
   BehaviorSubject<ThemeData> _subjectTheme;
 
-  ThemeBloc({ThemeData dayTheme, ThemeData nightTheme}) {
+  ThemeBloc({@required ThemeData dayTheme, @required ThemeData nightTheme})
+      : assert(dayTheme != null || nightTheme != null) {
     _dayTheme = dayTheme;
     _nightTheme = nightTheme;
 
