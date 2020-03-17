@@ -4,9 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'extensions.dart';
+import 'dart:html';
 
 class LocalizationTools {
-  /// Возвращает поддерживаемые локали приложением в формате `locale`: `locale_name`.
+  /// Возвращает поддерживаемые языки приложением в формате `locale`: `locale_name`.
   static Future<Map<Locale, String>> getSupportedLocales(
     BuildContext context, [
     String path = 'resources/lang/',
@@ -38,8 +39,12 @@ class LocalizationTools {
   /// Возвращает наиболее подходящий язык для пользователя,
   /// основываясь на локализации устройства.
   static Locale recommendedLocale(List<Locale> supportedLocales) {
-    Locale locale = Intl.getCurrentLocale().toLocale();
+    String localeLanguage = Intl.canonicalizedLocale(window.navigator.language)
+        .toLocale()
+        .languageCode;
 
-    return supportedLocales.contains(locale) ? locale : Locale('en');
+    return supportedLocales.contains(Locale(localeLanguage))
+        ? Locale(localeLanguage)
+        : Locale('en');
   }
 }
