@@ -33,11 +33,12 @@ class ThemeBloc {
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarIconBrightness: value ? Brightness.light : Brightness.dark,
+        statusBarIconBrightness: !value ? Brightness.light : Brightness.dark,
         systemNavigationBarColor: theme.scaffoldBackgroundColor,
         statusBarColor: Colors.transparent,
-        statusBarBrightness: Brightness.dark,
-        systemNavigationBarIconBrightness: Brightness.light,
+        statusBarBrightness: !value ? Brightness.light : Brightness.dark,
+        systemNavigationBarIconBrightness:
+            !value ? Brightness.light : Brightness.dark,
       ),
     );
   }
