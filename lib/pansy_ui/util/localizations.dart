@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'extensions.dart';
-import 'dart:html';
 
 class LocalizationTools {
   /// Возвращает поддерживаемые языки приложением в формате `locale`: `locale_name`.
@@ -39,9 +38,7 @@ class LocalizationTools {
   /// Возвращает наиболее подходящий язык для пользователя,
   /// основываясь на локализации устройства.
   static Locale recommendedLocale(List<Locale> supportedLocales) {
-    String localeLanguage = Intl.canonicalizedLocale(window.navigator.language)
-        .toLocale()
-        .languageCode;
+    String localeLanguage = Intl.getCurrentLocale().toLocale().languageCode;
 
     return supportedLocales.contains(Locale(localeLanguage))
         ? Locale(localeLanguage)
