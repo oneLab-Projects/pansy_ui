@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:native_device_orientation/native_device_orientation.dart';
-
 import 'package:pansy_ui/pansy_ui.dart';
-import 'animated_indexed_stack.dart';
 
 /// [UNestedTabModel] является моделью для представления вкладки,
 /// работающей с [UNestedNavigator].
@@ -80,55 +77,47 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
 
   /// Создаёт стек, хранящий в себе все вкладки.
   Widget _buildPageBody() {
-    return NativeDeviceOrientationReader(builder: (context) {
-      return Padding(
-        padding: _getPadding(
-          NativeDeviceOrientationReader.orientation(context),
-        ),
-        child: AnimatedIndexedStack(
-          index: currentIndex,
-          children: widget.tabs.map((tab) => _buildNavigator(tab)).toList(),
-        ),
-      );
-    });
+    return Padding(
+      padding: _getPadding(
+        MediaQuery.of(context).orientation,
+      ),
+      child: AnimatedIndexedStack(
+        index: currentIndex,
+        children: widget.tabs.map((tab) => _buildNavigator(tab)).toList(),
+      ),
+    );
   }
 
   /// Создаёт задний фон нижней панели навигации.
   Widget _buildBottomBarBackground() {
-    return NativeDeviceOrientationReader(builder: (context) {
-      NativeDeviceOrientation orientation;
-      orientation = NativeDeviceOrientationReader.orientation(context);
-      double height = UBottomNavigationBar.getAlignment(orientation) ==
-              Alignment.bottomCenter
-          ? UBottomNavigationBar.heightNavigationBarVertical
-          : double.infinity;
-      double width = UBottomNavigationBar.getAlignment(orientation) ==
-              Alignment.bottomCenter
-          ? double.infinity
-          : UBottomNavigationBar.weightNavigationBarHorisontal;
-      return Align(
-        alignment: UBottomNavigationBar.getAlignment(orientation),
-        child: Container(
-          color: widget.backgroundColor,
-          height: height,
-          width: width,
-        ),
-      );
-    });
+    Orientation orientation;
+    orientation = MediaQuery.of(context).orientation;
+    double height =
+        UBottomNavigationBar.getAlignment(orientation) == Alignment.bottomCenter
+            ? UBottomNavigationBar.heightNavigationBarVertical
+            : double.infinity;
+    double width =
+        UBottomNavigationBar.getAlignment(orientation) == Alignment.bottomCenter
+            ? double.infinity
+            : UBottomNavigationBar.weightNavigationBarHorisontal;
+    return Align(
+      alignment: UBottomNavigationBar.getAlignment(orientation),
+      child: Container(
+        color: widget.backgroundColor,
+        height: height,
+        width: width,
+      ),
+    );
   }
 
   /// Возвращает значение отступов, в зависимости от ориентации
   /// устройства, для корректного отображения `body`.
-  EdgeInsets _getPadding(NativeDeviceOrientation orientation) {
-    if (orientation == NativeDeviceOrientation.landscapeLeft)
-      return const EdgeInsets.only(
-          right: UBottomNavigationBar.weightNavigationBarHorisontal);
-    else
-      return (orientation == NativeDeviceOrientation.landscapeRight)
-          ? const EdgeInsets.only(
-              left: UBottomNavigationBar.weightNavigationBarHorisontal)
-          : const EdgeInsets.only(
-              bottom: UBottomNavigationBar.heightNavigationBarVertical);
+  EdgeInsets _getPadding(Orientation orientation) {
+    return (orientation == Orientation.landscape)
+        ? const EdgeInsets.only(
+            left: UBottomNavigationBar.weightNavigationBarHorisontal + 15)
+        : const EdgeInsets.only(
+            bottom: UBottomNavigationBar.heightNavigationBarVertical);
   }
 
   /// Создаёт вкладку.

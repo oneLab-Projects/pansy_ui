@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:native_device_orientation/native_device_orientation.dart';
+import 'package:pansy_ui/pansy_ui.dart';
 
 /// Создаёт элемент нижней панели навигации. Так же принимает
 /// `badge` для отображения статуса непрочитанной информации.
@@ -35,13 +35,10 @@ class UBottomNavigationBar extends StatefulWidget {
 
   /// Возвращает значение выравнивания контента, в зависимости от ориентации
   /// устройства, для корректного отображения `body`.
-  static Alignment getAlignment(NativeDeviceOrientation orientation) {
-    if (orientation == NativeDeviceOrientation.landscapeLeft)
-      return Alignment.centerRight;
-    else
-      return (orientation == NativeDeviceOrientation.landscapeRight)
-          ? Alignment.centerLeft
-          : Alignment.bottomCenter;
+  static Alignment getAlignment(Orientation orientation) {
+    return (orientation == Orientation.landscape)
+        ? Alignment.centerLeft
+        : Alignment.bottomCenter;
   }
 
   _UBottomNavigationBarState createState() => _UBottomNavigationBarState();
@@ -67,14 +64,8 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
       );
     });
 
-    return NativeDeviceOrientationReader(
-      builder: (context) {
-        NativeDeviceOrientation orientation;
-        orientation = NativeDeviceOrientationReader.orientation(context);
-
-        return _buildBottomNavigationBar(context, items, orientation);
-      },
-    );
+    return _buildBottomNavigationBar(
+        context, items, MediaQuery.of(context).orientation);
   }
 
   /// Возвращает значение [Border], в зависимости от ориентации устройства.
@@ -88,8 +79,8 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
   }
 
   /// Создаёт нижнюю панель навигации.
-  Widget _buildBottomNavigationBar(BuildContext context, List<Widget> items,
-      NativeDeviceOrientation orientation) {
+  Widget _buildBottomNavigationBar(
+      BuildContext context, List<Widget> items, Orientation orientation) {
     double height =
         UBottomNavigationBar.getAlignment(orientation) == Alignment.bottomCenter
             ? UBottomNavigationBar.heightNavigationBarVertical
@@ -112,39 +103,44 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
       child: ClipRRect(
         child: Stack(
           children: <Widget>[
-            SizedBox(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                child: Container(
-                  constraints:
-                      BoxConstraints.expand(height: height, width: width),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context)
-                        .scaffoldBackgroundColor
-                        .withOpacity(0.5),
-                    border: _alignmentToBorder(
-                      UBottomNavigationBar.getAlignment(orientation),
-                      BorderSide(
-                        color: Theme.of(context).dividerColor.withAlpha(35),
-                        width: 0.5,
+            if (Device.isPhone)
+              SizedBox(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                  child: Container(
+                    constraints:
+                        BoxConstraints.expand(height: height, width: width),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .scaffoldBackgroundColor
+                          .withOpacity(0.5),
+                      border: _alignmentToBorder(
+                        UBottomNavigationBar.getAlignment(orientation),
+                        BorderSide(
+                          color: Theme.of(context).dividerColor.withAlpha(35),
+                          width: 0.5,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
             Material(
               type: MaterialType.transparency,
               child: Container(
-                constraints:
-                    BoxConstraints.expand(height: height, width: width),
+                constraints: BoxConstraints.expand(
+                  height: height,
+                  width: Device.isPhone ? width : 120,
+                ),
                 margin: EdgeInsets.only(
                   top: marginTop,
                 ),
                 child: Center(
                   child: Flex(
                     direction: direction,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: Device.isPhone
+                        ? MainAxisAlignment.spaceAround
+                        : MainAxisAlignment.center,
                     children: items,
                   ),
                 ),
@@ -166,30 +162,41 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
         ? item.selectedIconData
         : item.iconData;
     return Expanded(
-      child: SizedBox.expand(
-        child: InkWell(
-          splashColor: Colors.black12,
-          highlightColor: Colors.black12,
-          borderRadius: BorderRadius.circular(5),
-          onTap: () => onPressed(index),
-          child: Stack(
-            children: <Widget>[
-              Center(child: Icon(iconData, size: widget.iconSize)),
-              Positioned(
-                bottom: 33,
-                left: 59,
-                child: AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.bounceOut,
-                  width: item.badge ? 8 : 0,
-                  height: item.badge ? 8 : 0,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(10),
+      flex: Device.isPhone ? 1 : 0,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            vertical: Device.isPhone ? 0 : 30,
+            horizontal: Device.isPhone ? 0 : 30),
+        child: SizedBox(
+          height: Device.isPhone ? double.infinity : 60,
+          child: InkWell(
+            splashColor: Colors.black12,
+            highlightColor: Colors.black12,
+            borderRadius: BorderRadius.circular(5),
+            onTap: () => onPressed(index),
+            child: Stack(
+              children: <Widget>[
+                Center(
+                    child: Icon(iconData,
+                        size: Device.isPhone
+                            ? widget.iconSize
+                            : widget.iconSize * 1.1)),
+                Positioned(
+                  bottom: 33,
+                  left: 59,
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.bounceOut,
+                    width: item.badge ? 8 : 0,
+                    height: item.badge ? 8 : 0,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

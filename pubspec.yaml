@@ -24,8 +24,5 @@ dependencies:
   # db
   shared_preferences: ^0.5.6+2
 
-  # ui
-  native_device_orientation: ^0.3.0
-
   # compare
   equatable: ^1.1.0

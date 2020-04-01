@@ -46,21 +46,25 @@ class _UScaffoldState extends State<UScaffold> {
     return Scaffold(
       body: SafeArea(
         top: false,
-        child: SizedBox.expand(
-          child: Stack(children: [
-            if (!widget.showBackButton)
-              widget.title == null
-                  ? _content(context)
-                  : _contentWithTitleBar(context),
-            if (widget.showBackButton) _contentWithBackButton(context),
-            Opacity(
-              opacity: _scrollPosition < 1 ? 1 - _scrollPosition : 0,
-              child: Container(
-                color: Theme.of(context).scaffoldBackgroundColor.withAlpha(90),
-                height: MediaQuery.of(context).padding.top,
-              ),
-            )
-          ]),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: Device.isPhone ? 0 : 100),
+          child: SizedBox.expand(
+            child: Stack(children: [
+              if (!widget.showBackButton)
+                widget.title == null
+                    ? _content(context)
+                    : _contentWithTitleBar(context),
+              if (widget.showBackButton) _contentWithBackButton(context),
+              Opacity(
+                opacity: _scrollPosition < 1 ? 1 - _scrollPosition : 0,
+                child: Container(
+                  color:
+                      Theme.of(context).scaffoldBackgroundColor.withAlpha(90),
+                  height: MediaQuery.of(context).padding.top,
+                ),
+              )
+            ]),
+          ),
         ),
       ),
     );
@@ -114,8 +118,12 @@ class _UScaffoldState extends State<UScaffold> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                    height: UScaffold.titleHeight +
-                        MediaQuery.of(context).padding.top),
+                    height: Device.isPhone
+                        ? UScaffold.titleHeight +
+                            MediaQuery.of(context).padding.top
+                        : UScaffold.titleHeight +
+                            MediaQuery.of(context).padding.top +
+                            60),
                 widget.body,
               ],
             ),
@@ -158,7 +166,10 @@ class _UScaffoldState extends State<UScaffold> {
       physics: BouncingScrollPhysics(),
       child: Column(
         children: <Widget>[
-          SizedBox(height: MediaQuery.of(context).padding.top),
+          SizedBox(
+              height: Device.isPhone
+                  ? MediaQuery.of(context).padding.top
+                  : MediaQuery.of(context).padding.top + 60),
           widget.body,
         ],
       ),
@@ -172,20 +183,27 @@ class _UScaffoldState extends State<UScaffold> {
           ? _scrollPosition
           : 1 - (_scrollPosition - 1) / _scrollPosition,
       child: Padding(
-        padding: EdgeInsets.only(top: 20 + MediaQuery.of(context).padding.top),
+        padding: EdgeInsets.only(
+            top: Device.isPhone
+                ? 20 + MediaQuery.of(context).padding.top
+                : 70 + MediaQuery.of(context).padding.top,
+            left: Device.isPhone ? 0 : 20),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: Device.isPhone
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.start,
           children: <Widget>[
             Transform.scale(
               scale: _scrollPosition < 1
                   ? 1 - (1 - _scrollPosition) * 0.3
                   : 1 + (1 - _scrollPosition) / _scrollPosition * 0.15,
+              alignment: Device.isPhone ? Alignment.center : Alignment.topLeft,
               child: Text(
                 widget.title,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    .copyWith(fontSize: 20, fontWeight: FontWeight.w500),
+                style: Theme.of(context).textTheme.headline6.copyWith(
+                    fontSize: Device.isPhone ? 20 : 30,
+                    fontWeight:
+                        Device.isPhone ? FontWeight.w500 : FontWeight.w700),
               ),
             ),
           ],
@@ -198,7 +216,10 @@ class _UScaffoldState extends State<UScaffold> {
   Widget _contentWithBackButton(context) {
     return Column(
       children: <Widget>[
-        SizedBox(height: MediaQuery.of(context).padding.top),
+        SizedBox(
+            height: Device.isPhone
+                ? MediaQuery.of(context).padding.top
+                : MediaQuery.of(context).padding.top + 60),
         _titleBarWithBackButton(context),
         Expanded(
           child: SingleChildScrollView(
@@ -216,16 +237,21 @@ class _UScaffoldState extends State<UScaffold> {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 11),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           UIconButton(
             onPressed: () => Navigator.pop(context),
             iconData: Icons.arrow_back,
+            iconSize: Device.isPhone ? 24 : 27,
           ),
           const SizedBox(width: 8),
           if (widget.title != null)
             Text(
               widget.title,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.headline6.copyWith(
+                  fontSize: Device.isPhone ? 19 : 21,
+                  fontWeight:
+                      Device.isPhone ? FontWeight.w500 : FontWeight.w700),
             ),
         ],
       ),
