@@ -15,7 +15,7 @@ dependencies:
   transparent_image: ^1.0.0
 
   # localizations
-  intl: ^0.16.1
+  devicelocale: ^0.2.2
 
   # bloc
   rxdart: ^0.23.1
