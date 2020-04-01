@@ -36,9 +36,9 @@ class UBottomNavigationBar extends StatefulWidget {
   /// Возвращает значение выравнивания контента, в зависимости от ориентации
   /// устройства, для корректного отображения `body`.
   static Alignment getAlignment(Orientation orientation) {
-    return (orientation == Orientation.landscape)
-        ? Alignment.centerLeft
-        : Alignment.bottomCenter;
+    return (orientation == Orientation.portrait && Device.isPhone)
+        ? Alignment.bottomCenter
+        : Alignment.centerLeft;
   }
 
   _UBottomNavigationBarState createState() => _UBottomNavigationBarState();
@@ -70,9 +70,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
 
   /// Возвращает значение [Border], в зависимости от ориентации устройства.
   Border _alignmentToBorder(Alignment alignment, BorderSide side) {
-    if (alignment == Alignment.centerRight)
-      return Border(left: side);
-    else if (alignment == Alignment.centerLeft)
+    if (alignment == Alignment.centerLeft)
       return Border(right: side);
     else
       return Border(top: side);

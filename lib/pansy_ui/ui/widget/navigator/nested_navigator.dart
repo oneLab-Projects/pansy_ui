@@ -113,11 +113,11 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
   /// Возвращает значение отступов, в зависимости от ориентации
   /// устройства, для корректного отображения `body`.
   EdgeInsets _getPadding(Orientation orientation) {
-    return (orientation == Orientation.landscape)
+    return (orientation == Orientation.portrait && Device.isPhone)
         ? const EdgeInsets.only(
-            left: UBottomNavigationBar.weightNavigationBarHorisontal + 15)
+            bottom: UBottomNavigationBar.heightNavigationBarVertical)
         : const EdgeInsets.only(
-            bottom: UBottomNavigationBar.heightNavigationBarVertical);
+            left: UBottomNavigationBar.weightNavigationBarHorisontal + 15);
   }
 
   /// Создаёт вкладку.
