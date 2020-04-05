@@ -8,7 +8,7 @@ class LocalizationsBloc {
   Locale recommendedLocale;
   BehaviorSubject<bool> _statusStream = BehaviorSubject<bool>.seeded(false);
 
-  LocalizationsBloc(BuildContext context, String path) {
+  LocalizationsBloc(BuildContext context, [String path]) {
     LocalizationTools.getSupportedLocales(context, path).then((value) {
       supportedLocales = value;
       LocalizationTools.recommendedLocale(supportedLocales.keys.toList()).then(
