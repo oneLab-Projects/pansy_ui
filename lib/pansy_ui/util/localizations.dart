@@ -9,8 +9,10 @@ class LocalizationTools {
   /// Возвращает поддерживаемые языки приложением в формате `locale`: `locale_name`.
   static Future<Map<Locale, String>> getSupportedLocales(
     BuildContext context, [
-    String path = 'resources/lang/',
+    String path = 'resources/lang',
   ]) async {
+    path += '/';
+
     String manifestContent =
         await DefaultAssetBundle.of(context).loadString('AssetManifest.json');
     Map<String, dynamic> manifestMap = json.decode(manifestContent);
