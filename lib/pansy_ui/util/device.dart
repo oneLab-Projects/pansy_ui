@@ -9,7 +9,7 @@ class Device {
   static double screenHeight = height / devicePixelRatio;
   static ui.Size screenSize = ui.Size(screenWidth, screenHeight);
 
-  static bool get isPhone {
+  static bool isPhone() {
     bool phone;
 
     if (devicePixelRatio < 2 && (width >= 1000 || height >= 1000))

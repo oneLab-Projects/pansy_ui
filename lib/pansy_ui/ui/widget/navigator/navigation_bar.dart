@@ -36,7 +36,7 @@ class UBottomNavigationBar extends StatefulWidget {
   /// Возвращает значение выравнивания контента, в зависимости от ориентации
   /// устройства, для корректного отображения `body`.
   static Alignment getAlignment(Orientation orientation) {
-    return (orientation == Orientation.portrait && Device.isPhone)
+    return (orientation == Orientation.portrait && Device.isPhone())
         ? Alignment.bottomCenter
         : Alignment.centerLeft;
   }
@@ -101,7 +101,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
       child: ClipRRect(
         child: Stack(
           children: <Widget>[
-            if (Device.isPhone)
+            if (Device.isPhone())
               SizedBox(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
@@ -128,7 +128,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
               child: Container(
                 constraints: BoxConstraints.expand(
                   height: height,
-                  width: Device.isPhone ? width : 120,
+                  width: Device.isPhone() ? width : 120,
                 ),
                 margin: EdgeInsets.only(
                   top: marginTop,
@@ -136,7 +136,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
                 child: Center(
                   child: Flex(
                     direction: direction,
-                    mainAxisAlignment: Device.isPhone
+                    mainAxisAlignment: Device.isPhone()
                         ? MainAxisAlignment.spaceAround
                         : MainAxisAlignment.center,
                     children: items,
@@ -160,13 +160,13 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
         ? item.selectedIconData
         : item.iconData;
     return Expanded(
-      flex: Device.isPhone ? 1 : 0,
+      flex: Device.isPhone() ? 1 : 0,
       child: Padding(
         padding: EdgeInsets.symmetric(
-            vertical: Device.isPhone ? 0 : 30,
-            horizontal: Device.isPhone ? 0 : 30),
+            vertical: Device.isPhone() ? 0 : 30,
+            horizontal: Device.isPhone() ? 0 : 30),
         child: SizedBox(
-          height: Device.isPhone ? double.infinity : 60,
+          height: Device.isPhone() ? double.infinity : 60,
           child: InkWell(
             splashColor: Colors.black12,
             highlightColor: Colors.black12,
@@ -176,7 +176,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
               children: <Widget>[
                 Center(
                     child: Icon(iconData,
-                        size: Device.isPhone
+                        size: Device.isPhone()
                             ? widget.iconSize
                             : widget.iconSize * 1.1)),
                 Positioned(

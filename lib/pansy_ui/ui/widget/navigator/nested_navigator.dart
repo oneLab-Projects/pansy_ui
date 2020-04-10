@@ -113,7 +113,7 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
   /// Возвращает значение отступов, в зависимости от ориентации
   /// устройства, для корректного отображения `body`.
   EdgeInsets _getPadding(Orientation orientation) {
-    return (orientation == Orientation.portrait && Device.isPhone)
+    return (orientation == Orientation.portrait && Device.isPhone())
         ? const EdgeInsets.only(
             bottom: UBottomNavigationBar.heightNavigationBarVertical)
         : const EdgeInsets.only(
