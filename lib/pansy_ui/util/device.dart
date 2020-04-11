@@ -10,6 +10,7 @@ class Device {
       width = MediaQuery.of(context).size.width;
       height = MediaQuery.of(context).size.height;
     } else {
+      devicePixelRatio = ui.window.devicePixelRatio;
       ui.Size size = ui.window.physicalSize;
       width = size.width;
       height = size.height;
