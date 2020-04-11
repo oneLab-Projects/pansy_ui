@@ -46,26 +46,34 @@ class _UScaffoldState extends State<UScaffold> {
     return Scaffold(
       body: SafeArea(
         top: false,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: Device.isPhone(context) ? 0 : 100),
-          child: SizedBox.expand(
-            child: Stack(children: [
-              if (!widget.showBackButton)
-                widget.title == null
-                    ? _content(context)
-                    : _contentWithTitleBar(context),
-              if (widget.showBackButton) _contentWithBackButton(context),
-              Opacity(
-                opacity: _scrollPosition < 1 ? 1 - _scrollPosition : 0,
-                child: Container(
-                  color:
-                      Theme.of(context).scaffoldBackgroundColor.withAlpha(90),
-                  height: MediaQuery.of(context).padding.top,
+        child: Stack(
+          children: <Widget>[
+            if (widget.blurBackground) _buildBlurBackground(context),
+            Center(
+              child: Padding(
+                padding: EdgeInsets.all(Device.isPhone(context) ? 0 : 28),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 1000),
+                  child: Stack(children: [
+                    if (!widget.showBackButton)
+                      widget.title == null
+                          ? _content(context)
+                          : _contentWithTitleBar(context),
+                    if (widget.showBackButton) _contentWithBackButton(context),
+                    Opacity(
+                      opacity: _scrollPosition < 1 ? 1 - _scrollPosition : 0,
+                      child: Container(
+                        color: Theme.of(context)
+                            .scaffoldBackgroundColor
+                            .withAlpha(90),
+                        height: MediaQuery.of(context).padding.top,
+                      ),
+                    )
+                  ]),
                 ),
-              )
-            ]),
-          ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -75,7 +83,6 @@ class _UScaffoldState extends State<UScaffold> {
   Widget _contentWithTitleBar(context) {
     return Stack(
       children: <Widget>[
-        if (widget.blurBackground) _buildBlurBackground(context),
         _titleBar(context),
         NotificationListener<ScrollNotification>(
           onNotification: (scrollState) {
@@ -138,23 +145,32 @@ class _UScaffoldState extends State<UScaffold> {
   Widget _buildBlurBackground(context) {
     return Stack(
       children: <Widget>[
-        SingleChildScrollView(
-          controller: _backgroundScrollController,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: UScaffold.titleHeight + MediaQuery.of(context).padding.top,
+        Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 1000),
+            child: SingleChildScrollView(
+              controller: _backgroundScrollController,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: Device.isPhone(context)
+                      ? MediaQuery.of(context).padding.top +
+                          UScaffold.titleHeight
+                      : MediaQuery.of(context).padding.top +
+                          UScaffold.titleHeight +
+                          60,
+                ),
+                child: widget.body,
+              ),
             ),
-            child: widget.body,
           ),
         ),
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
-          child: Container(
-            height: double.maxFinite,
-            padding: EdgeInsets.only(
-                top: UScaffold.titleHeight + MediaQuery.of(context).padding.top,
-                bottom: UScaffold.titleHeight),
-            color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
+        SizedBox.expand(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
+            child: Container(
+              height: double.maxFinite,
+              color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
+            ),
           ),
         ),
       ],
@@ -186,9 +202,9 @@ class _UScaffoldState extends State<UScaffold> {
       child: Padding(
         padding: EdgeInsets.only(
             top: Device.isPhone(context)
-                ? 20 + MediaQuery.of(context).padding.top
+                ? 25 + MediaQuery.of(context).padding.top
                 : 70 + MediaQuery.of(context).padding.top,
-            left: Device.isPhone(context) ? 0 : 20),
+            left: Device.isPhone(context) ? 0 : 18),
         child: Row(
           mainAxisAlignment: Device.isPhone(context)
               ? MainAxisAlignment.center
