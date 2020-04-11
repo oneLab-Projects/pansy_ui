@@ -92,16 +92,16 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
   Widget _buildBottomBarBackground() {
     Orientation orientation;
     orientation = MediaQuery.of(context).orientation;
-    double height =
-        UBottomNavigationBar.getAlignment(orientation) == Alignment.bottomCenter
-            ? UBottomNavigationBar.heightNavigationBarVertical
-            : double.infinity;
-    double width =
-        UBottomNavigationBar.getAlignment(orientation) == Alignment.bottomCenter
-            ? double.infinity
-            : UBottomNavigationBar.weightNavigationBarHorisontal;
+    double height = UBottomNavigationBar.getAlignment(context, orientation) ==
+            Alignment.bottomCenter
+        ? UBottomNavigationBar.heightNavigationBarVertical
+        : double.infinity;
+    double width = UBottomNavigationBar.getAlignment(context, orientation) ==
+            Alignment.bottomCenter
+        ? double.infinity
+        : UBottomNavigationBar.weightNavigationBarHorisontal;
     return Align(
-      alignment: UBottomNavigationBar.getAlignment(orientation),
+      alignment: UBottomNavigationBar.getAlignment(context, orientation),
       child: Container(
         color: widget.backgroundColor,
         height: height,
@@ -113,7 +113,7 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
   /// Возвращает значение отступов, в зависимости от ориентации
   /// устройства, для корректного отображения `body`.
   EdgeInsets _getPadding(Orientation orientation) {
-    return (orientation == Orientation.portrait && Device.isPhone())
+    return (orientation == Orientation.portrait && Device.isPhone(context))
         ? const EdgeInsets.only(
             bottom: UBottomNavigationBar.heightNavigationBarVertical)
         : const EdgeInsets.only(

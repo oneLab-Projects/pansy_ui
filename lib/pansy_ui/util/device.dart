@@ -1,24 +1,16 @@
-import 'dart:ui' as ui;
+import 'package:flutter/cupertino.dart';
 
 class Device {
-  static double devicePixelRatio = ui.window.devicePixelRatio;
-  static ui.Size size = ui.window.physicalSize;
-  static double width = size.width;
-  static double height = size.height;
-  static double screenWidth = width / devicePixelRatio;
-  static double screenHeight = height / devicePixelRatio;
-  static ui.Size screenSize = ui.Size(screenWidth, screenHeight);
-
-  static bool isPhone() {
-    bool phone;
+  static bool isPhone(BuildContext context) {
+    double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     if (devicePixelRatio < 2 && (width >= 1000 || height >= 1000))
-      phone = false;
+      return false;
     else if (devicePixelRatio == 2 && (width >= 1920 || height >= 1920))
-      phone = false;
+      return false;
     else
-      phone = true;
-
-    return phone;
+      return true;
   }
 }
