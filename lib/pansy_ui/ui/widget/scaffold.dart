@@ -49,34 +49,31 @@ class _UScaffoldState extends State<UScaffold> {
         child: Stack(
           children: <Widget>[
             if (widget.blurBackground) _buildBlurBackground(context),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Device.isPhone(context) ? 0 : 28),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 1000),
-                    child: Stack(children: [
-                      if (!widget.showBackButton)
-                        widget.title == null
-                            ? _content(context)
-                            : _contentWithTitleBar(context),
-                      if (widget.showBackButton)
-                        _contentWithBackButton(context),
-                      Opacity(
-                        opacity: _scrollPosition < 1 ? 1 - _scrollPosition : 0,
-                        child: Container(
-                          color: Theme.of(context)
-                              .scaffoldBackgroundColor
-                              .withAlpha(90),
-                          height: MediaQuery.of(context).padding.top,
-                        ),
-                      )
-                    ]),
-                  ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Device.isPhone(context) ? 0 : 28),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 1000),
+                  child: Stack(children: [
+                    if (!widget.showBackButton)
+                      widget.title == null
+                          ? _content(context)
+                          : _contentWithTitleBar(context),
+                    if (widget.showBackButton) _contentWithBackButton(context),
+                    Opacity(
+                      opacity: _scrollPosition < 1 ? 1 - _scrollPosition : 0,
+                      child: Container(
+                        color: Theme.of(context)
+                            .scaffoldBackgroundColor
+                            .withAlpha(90),
+                        height: MediaQuery.of(context).padding.top,
+                      ),
+                    )
+                  ]),
                 ),
-              ],
+              ),
             ),
           ],
         ),
@@ -150,29 +147,27 @@ class _UScaffoldState extends State<UScaffold> {
   Widget _buildBlurBackground(context) {
     return Stack(
       children: <Widget>[
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 1000),
-              child: SingleChildScrollView(
-                controller: _backgroundScrollController,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                          horizontal: Device.isPhone(context) ? 0 : 28)
-                      .copyWith(
-                    top: Device.isPhone(context)
-                        ? MediaQuery.of(context).padding.top +
-                            UScaffold.titleHeight
-                        : MediaQuery.of(context).padding.top +
-                            UScaffold.titleHeight +
-                            60,
-                  ),
-                  child: widget.body,
+        Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 1000),
+            child: SingleChildScrollView(
+              controller: _backgroundScrollController,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                        horizontal: Device.isPhone(context) ? 0 : 28)
+                    .copyWith(
+                  top: Device.isPhone(context)
+                      ? MediaQuery.of(context).padding.top +
+                          UScaffold.titleHeight
+                      : MediaQuery.of(context).padding.top +
+                          UScaffold.titleHeight +
+                          60,
                 ),
+                child: widget.body,
               ),
             ),
-          ],
+          ),
         ),
         SizedBox.expand(
           child: BackdropFilter(
