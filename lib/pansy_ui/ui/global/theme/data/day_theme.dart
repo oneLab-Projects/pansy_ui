@@ -3,6 +3,7 @@ import 'package:pansy_ui/pansy_ui.dart';
 
 /// Хранит [ThemeData] в стиле дневной темы приложения.
 final ThemeData dayTheme = ThemeData(
+  visualDensity: VisualDensity.adaptivePlatformDensity,
   brightness: Brightness.light,
   textTheme: Style.textTheme,
   primaryColor: Colors.grey[800],

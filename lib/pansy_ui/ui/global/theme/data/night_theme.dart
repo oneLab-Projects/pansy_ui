@@ -3,6 +3,7 @@ import 'package:pansy_ui/pansy_ui.dart';
 
 /// Хранит [ThemeData] в стиле ночной темы приложения.
 final ThemeData nightTheme = ThemeData(
+  visualDensity: VisualDensity.adaptivePlatformDensity,
   brightness: Brightness.dark,
   textTheme: Style.textTheme,
   primaryColor: Colors.grey[200],
