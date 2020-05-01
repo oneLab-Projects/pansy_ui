@@ -10,7 +10,7 @@ class ContentCard extends StatelessWidget {
   final String title;
   final String description;
   final ImageProvider image;
-  final String urlImage;
+  final String imageUrl;
   final Color textColor;
   final double height;
   final double width;
@@ -20,12 +20,12 @@ class ContentCard extends StatelessWidget {
     this.title,
     this.description,
     this.image,
-    this.urlImage,
+    this.imageUrl,
     this.textColor,
     this.height,
     this.width,
     this.variant,
-  }) : assert(image == null || urlImage == null);
+  }) : assert(image == null || imageUrl == null);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class ContentCard extends StatelessWidget {
         onTap: () {},
         child: Stack(
           children: <Widget>[
-            if (urlImage != null) _buildBackgroundImage(context),
+            if (imageUrl != null) _buildBackgroundImage(context),
             if (variant != ContentCardVariant.nano) _buildContent(context),
           ],
         ),
@@ -105,16 +105,16 @@ class ContentCard extends StatelessWidget {
       children: <Widget>[
         Transform.scale(
           scale: 1.001,
-          child: image != null && urlImage == null
+          child: image != null && imageUrl == null
               ? Image(
                   image: image,
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fill,
                 )
               : FadeInImage.memoryNetwork(
                   fadeInDuration: Duration(milliseconds: 150),
                   placeholder: kTransparentImage,
-                  image: urlImage,
-                  fit: BoxFit.fitHeight,
+                  image: imageUrl,
+                  fit: BoxFit.fill,
                 ),
         ),
         Container(
