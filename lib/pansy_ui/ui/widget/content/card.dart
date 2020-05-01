@@ -102,6 +102,7 @@ class ContentCard extends StatelessWidget {
   /// Создаёт фон карточки.
   Widget _buildBackgroundImage(BuildContext context) {
     return Stack(
+      fit: StackFit.expand,
       children: <Widget>[
         Transform.scale(
           scale: 1.001,
