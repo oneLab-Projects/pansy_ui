@@ -108,13 +108,13 @@ class ContentCard extends StatelessWidget {
           child: image != null && imageUrl == null
               ? Image(
                   image: image,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 )
               : FadeInImage.memoryNetwork(
                   fadeInDuration: Duration(milliseconds: 150),
                   placeholder: kTransparentImage,
                   image: imageUrl,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
         ),
         Container(
