@@ -119,7 +119,7 @@ class ContentCard extends StatelessWidget {
                 ),
         ),
         Container(
-          color: Colors.grey.withOpacity(0.4),
+          color: Colors.grey.withOpacity(0.6),
         )
       ],
     );
