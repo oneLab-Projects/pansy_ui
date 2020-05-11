@@ -3,7 +3,7 @@
 [![style: pedantic](https://img.shields.io/badge/style-pedantic-blue.svg)](https://github.com/dart-lang/pedantic)
 
 A package for Flutter designed for fast development of a beautiful interface, in the style of oneLab applications.
-###
+
 *The description and examples in the development.*
 
 #
