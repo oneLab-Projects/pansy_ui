@@ -62,8 +62,8 @@ class _AnimatedIndexedStackState extends State<AnimatedIndexedStack>
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
-        return Opacity(
-          opacity: _controller.value,
+        return FadeTransition(
+          opacity: _controller,
           child: Transform.scale(
             scale: 1.015 - (_controller.value * 0.015),
             child: child,
