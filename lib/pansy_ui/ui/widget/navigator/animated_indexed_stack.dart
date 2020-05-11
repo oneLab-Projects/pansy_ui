@@ -34,6 +34,8 @@ class _AnimatedIndexedStackState extends State<AnimatedIndexedStack>
 
   @override
   void initState() {
+    super.initState();
+
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 150),
@@ -47,7 +49,6 @@ class _AnimatedIndexedStackState extends State<AnimatedIndexedStack>
 
     _index = widget.index;
     _controller.forward();
-    super.initState();
   }
 
   @override

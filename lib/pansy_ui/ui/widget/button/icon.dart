@@ -22,7 +22,7 @@ class UIconButton extends StatelessWidget {
       width: width,
       height: height,
       child: InkWell(
-        customBorder: CircleBorder(),
+        customBorder: const CircleBorder(),
         child: Icon(
           iconData,
           size: iconSize,

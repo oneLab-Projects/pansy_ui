@@ -45,28 +45,26 @@ class ContentCard extends StatelessWidget {
 
   /// Создаёт содержимое карточки.
   Widget _buildContent(BuildContext context) {
-    return Align(
+    return Container(
+      padding: const EdgeInsets.only(bottom: 20),
       alignment: Alignment.bottomLeft,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(width: 20),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  if (description != null && variant != ContentCardVariant.mini)
-                    _buildDescription(context),
-                  _buildCaption(context),
-                ],
-              ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(width: 20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                if (description != null && variant != ContentCardVariant.mini)
+                  _buildDescription(context),
+                _buildCaption(context),
+              ],
             ),
-            const SizedBox(width: 20),
-          ],
-        ),
+          ),
+          const SizedBox(width: 20),
+        ],
       ),
     );
   }

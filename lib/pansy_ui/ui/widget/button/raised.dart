@@ -57,8 +57,8 @@ class URaisedButton extends StatelessWidget {
 
   /// Создаёт виджет, предоставляющий анимацию загрузки.
   Widget _buildLoader(BuildContext context) {
-    return Opacity(
-      opacity: loading ? 0.8 : 0,
+    return Visibility(
+      visible: loading,
       child: SizedBox(
         width: 18,
         height: 18,
@@ -84,7 +84,7 @@ class URaisedButton extends StatelessWidget {
   /// Создаёт текст кнопки.
   Widget _buildText(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Text(
         text,
         textAlign: TextAlign.center,

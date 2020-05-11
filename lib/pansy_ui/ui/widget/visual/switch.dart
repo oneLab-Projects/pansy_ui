@@ -15,7 +15,7 @@ class _USwitchVisualState extends State<USwitchVisual> {
     return Container(
       width: 40,
       height: 20,
-      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(
         color: widget.value
             ? Theme.of(context).primaryColor

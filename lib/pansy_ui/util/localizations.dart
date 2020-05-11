@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:devicelocale/devicelocale.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'extensions.dart';
@@ -42,11 +42,11 @@ class LocalizationTools {
   /// основываясь на локализации устройства.
   static Future<Locale> recommendedLocale(List<Locale> supportedLocales) async {
     String localeLanguage;
-    if (kIsWeb)
-      localeLanguage = 'en';
-    else
+    if (Platform.isAndroid || Platform.isIOS)
       localeLanguage =
           (await Devicelocale.currentLocale).toLocale().languageCode;
+    else
+      localeLanguage = 'en';
 
     return supportedLocales.contains(Locale(localeLanguage))
         ? Locale(localeLanguage)

@@ -34,9 +34,10 @@ class SelectionDialog extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 8,
-                offset: Offset(0, 3)),
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 8,
+              offset: Offset(0, 3),
+            ),
           ],
         ),
         child: Material(
@@ -56,8 +57,11 @@ class SelectionDialog extends StatelessWidget {
         Flexible(
           child: SingleChildScrollView(
             child: Column(
-                children: List.generate(actions.length,
-                    (int index) => _buildActionItem(context, actions[index]))),
+              children: List.generate(
+                actions.length,
+                (int index) => _buildActionItem(context, actions[index]),
+              ),
+            ),
           ),
         ),
         Divider(height: 1),

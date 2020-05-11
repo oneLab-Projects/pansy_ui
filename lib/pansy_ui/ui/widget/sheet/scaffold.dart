@@ -31,7 +31,7 @@ class ScaffoldSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
         color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20).copyWith(

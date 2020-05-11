@@ -63,7 +63,7 @@ class UListContent extends StatelessWidget {
   /// Создаёт заголовок и описание виджета вместе.
   Widget _buildCaption(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 22),
+      padding: const EdgeInsets.symmetric(horizontal: 22),
       child: Row(
         children: <Widget>[
           if (iconData != null) _buildIcon(context),

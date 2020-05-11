@@ -30,15 +30,10 @@ class _UScaffoldState extends State<UScaffold> {
   double _scrollPosition = 1;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
-    super.dispose();
     _scrollController.dispose();
     _backgroundScrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,31 +44,27 @@ class _UScaffoldState extends State<UScaffold> {
         child: Stack(
           children: <Widget>[
             if (widget.blurBackground) _buildBlurBackground(context),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: Device.isPhone(context) ? 0 : 28),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 1000),
-                  child: Stack(children: [
-                    if (!widget.showBackButton)
-                      widget.title == null
-                          ? _content(context)
-                          : _contentWithTitleBar(context),
-                    if (widget.showBackButton) _contentWithBackButton(context),
-                    Opacity(
-                      opacity: _scrollPosition < 1 ? 1 - _scrollPosition : 0,
-                      child: Container(
-                        color: Theme.of(context)
-                            .scaffoldBackgroundColor
-                            .withAlpha(90),
-                        height: MediaQuery.of(context).padding.top,
-                      ),
-                    )
-                  ]),
-                ),
+            Container(
+              constraints: BoxConstraints(maxWidth: 1000),
+              padding: EdgeInsets.symmetric(
+                horizontal: Device.isPhone(context) ? 0 : 28,
               ),
+              alignment: Alignment.topCenter,
+              child: Stack(children: [
+                if (!widget.showBackButton)
+                  widget.title == null
+                      ? _content(context)
+                      : _contentWithTitleBar(context),
+                if (widget.showBackButton) _contentWithBackButton(context),
+                Opacity(
+                  opacity: _scrollPosition < 1 ? 1 - _scrollPosition : 0,
+                  child: Container(
+                    color:
+                        Theme.of(context).scaffoldBackgroundColor.withAlpha(90),
+                    height: MediaQuery.of(context).padding.top,
+                  ),
+                ),
+              ]),
             ),
           ],
         ),
@@ -147,25 +138,22 @@ class _UScaffoldState extends State<UScaffold> {
   Widget _buildBlurBackground(context) {
     return Stack(
       children: <Widget>[
-        Align(
+        Container(
+          constraints: BoxConstraints(maxWidth: 1000),
           alignment: Alignment.topCenter,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 1000),
-            child: SingleChildScrollView(
-              controller: _backgroundScrollController,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                        horizontal: Device.isPhone(context) ? 0 : 28)
-                    .copyWith(
-                  top: Device.isPhone(context)
-                      ? MediaQuery.of(context).padding.top +
-                          UScaffold.titleHeight
-                      : MediaQuery.of(context).padding.top +
-                          UScaffold.titleHeight +
-                          60,
-                ),
-                child: widget.body,
+          child: SingleChildScrollView(
+            controller: _backgroundScrollController,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                      horizontal: Device.isPhone(context) ? 0 : 28)
+                  .copyWith(
+                top: Device.isPhone(context)
+                    ? MediaQuery.of(context).padding.top + UScaffold.titleHeight
+                    : MediaQuery.of(context).padding.top +
+                        UScaffold.titleHeight +
+                        60,
               ),
+              child: widget.body,
             ),
           ),
         ),
@@ -225,10 +213,11 @@ class _UScaffoldState extends State<UScaffold> {
               child: Text(
                 widget.title,
                 style: Theme.of(context).textTheme.headline6.copyWith(
-                    fontSize: Device.isPhone(context) ? 20 : 30,
-                    fontWeight: Device.isPhone(context)
-                        ? FontWeight.w500
-                        : FontWeight.w700),
+                      fontSize: Device.isPhone(context) ? 20 : 30,
+                      fontWeight: Device.isPhone(context)
+                          ? FontWeight.w500
+                          : FontWeight.w700,
+                    ),
               ),
             ),
           ],
@@ -291,9 +280,10 @@ class CustomScrollController extends ScrollController {
     keepScrollOffset = true,
     debugLabel,
   }) : super(
-            initialScrollOffset: initialScrollOffset,
-            keepScrollOffset: keepScrollOffset,
-            debugLabel: debugLabel);
+          initialScrollOffset: initialScrollOffset,
+          keepScrollOffset: keepScrollOffset,
+          debugLabel: debugLabel,
+        );
 
   @override
   _SilentScrollPosition createScrollPosition(
