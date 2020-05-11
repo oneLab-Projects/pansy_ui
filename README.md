@@ -1,22 +1,16 @@
-A library for Dart developers.
+## pansy_ui
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+[![style: pedantic](https://img.shields.io/badge/style-pedantic-blue.svg)](https://github.com/dart-lang/pedantic)
 
-## Usage
+A package for Flutter designed for fast development of a beautiful interface, in the style of oneLab applications.
+###
+*The description and examples in the development.*
 
-A simple usage example:
+#
 
-```dart
-import 'package:pansy_ui/pansy_ui.dart';
+You can show support by showing in your repository that your project uses the pansy_ui-based interface using our icon:
+[![Package for beautiful interface](https://img.shields.io/badge/powered_by-pansy__ui-orange)](https://github.com/oneLab-Projects/pansy_ui)
 
-main() {
-  var awesome = new Awesome();
-}
+```md
+[![Package for beautiful interface](https://img.shields.io/badge/powered_by-pansy__ui-orange)](https://github.com/oneLab-Projects/pansy_ui)
 ```
-
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-[tracker]: http://example.com/issues/replaceme
