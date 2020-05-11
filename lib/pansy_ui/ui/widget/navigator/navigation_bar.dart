@@ -187,7 +187,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
                   bottom: 33,
                   left: 59,
                   child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
+                    duration: Duration(milliseconds: 300),
                     curve: Curves.bounceOut,
                     width: item.badge ? 8 : 0,
                     height: item.badge ? 8 : 0,

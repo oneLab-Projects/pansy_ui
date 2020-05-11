@@ -22,7 +22,7 @@ class URaisedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedOpacity(
       opacity: onPressed != null ? 1 : 0.9,
-      duration: const Duration(milliseconds: 150),
+      duration: Duration(milliseconds: 150),
       child: Material(
         borderRadius: BorderRadius.circular(5),
         color: Theme.of(context).primaryColor,
@@ -39,7 +39,7 @@ class URaisedButton extends StatelessWidget {
   /// Создаёт содержимое кнопки.
   Widget _buildContent(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
@@ -85,7 +85,7 @@ class URaisedButton extends StatelessWidget {
   /// Создаёт текст кнопки.
   Widget _buildText(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: EdgeInsets.symmetric(horizontal: 12),
       child: Text(
         text,
         textAlign: TextAlign.center,

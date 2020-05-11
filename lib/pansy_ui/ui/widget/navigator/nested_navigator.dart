@@ -116,9 +116,9 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
   /// устройства, для корректного отображения `body`.
   EdgeInsets _getPadding(Orientation orientation) {
     return (orientation == Orientation.portrait && Device.isPhone(context))
-        ? const EdgeInsets.only(
+        ? EdgeInsets.only(
             bottom: UBottomNavigationBar.heightNavigationBarVertical)
-        : const EdgeInsets.only(
+        : EdgeInsets.only(
             left: UBottomNavigationBar.weightNavigationBarHorisontal + 15);
   }
 

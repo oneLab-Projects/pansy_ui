@@ -26,7 +26,7 @@ class UListContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 70),
+      constraints: BoxConstraints(minHeight: 70),
       child: Stack(
         children: <Widget>[
           _buildContent(context),
@@ -47,7 +47,7 @@ class UListContent extends StatelessWidget {
   /// Создаёт содержимое виджета.
   Widget _buildContent(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15),
+      padding: EdgeInsets.symmetric(vertical: 15),
       child: Column(
         children: <Widget>[
           if (caption != null) _buildCaption(context),
@@ -64,7 +64,7 @@ class UListContent extends StatelessWidget {
   /// Создаёт заголовок и описание виджета вместе.
   Widget _buildCaption(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 22),
+      padding: EdgeInsets.symmetric(horizontal: 22),
       child: Row(
         children: <Widget>[
           if (iconData != null) _buildIcon(context),
@@ -86,7 +86,7 @@ class UListContent extends StatelessWidget {
               ? Theme.of(context).textTheme.button.color
               : Theme.of(context).textTheme.button.color.withAlpha(140),
         ),
-        const SizedBox(width: 15),
+        SizedBox(width: 15),
       ],
     );
   }
@@ -116,7 +116,7 @@ class UListContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 6),
+        SizedBox(height: 6),
         Text(
           description,
           style: Theme.of(context).textTheme.caption.copyWith(

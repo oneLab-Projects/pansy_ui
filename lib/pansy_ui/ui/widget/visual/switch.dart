@@ -15,7 +15,7 @@ class _USwitchVisualState extends State<USwitchVisual> {
     return Container(
       width: 40,
       height: 20,
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(
         color: widget.value
             ? Theme.of(context).primaryColor
@@ -23,7 +23,7 @@ class _USwitchVisualState extends State<USwitchVisual> {
         borderRadius: BorderRadius.circular(50),
       ),
       child: AnimatedAlign(
-        duration: const Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 200),
         curve: Curves.ease,
         alignment: widget.value ? Alignment.centerRight : Alignment.centerLeft,
         child: Container(
@@ -35,7 +35,7 @@ class _USwitchVisualState extends State<USwitchVisual> {
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
-                offset: widget.value ? const Offset(-1, 1) : const Offset(1, 1),
+                offset: widget.value ? Offset(-1, 1) : Offset(1, 1),
                 blurRadius: 3,
               ),
             ],

@@ -48,12 +48,12 @@ class ContentCard extends StatelessWidget {
   /// Создаёт содержимое карточки.
   Widget _buildContent(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.only(bottom: 20),
       alignment: Alignment.bottomLeft,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(width: 20),
+          SizedBox(width: 20),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class ContentCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 20),
+          SizedBox(width: 20),
         ],
       ),
     );
@@ -85,7 +85,7 @@ class ContentCard extends StatelessWidget {
   /// Создаёт описание карточки.
   Widget _buildDescription(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 1),
+      padding: EdgeInsets.only(bottom: 1),
       child: Opacity(
         opacity: 0.7,
         child: Text(
@@ -112,7 +112,7 @@ class ContentCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 )
               : FadeInImage.memoryNetwork(
-                  fadeInDuration: const Duration(milliseconds: 150),
+                  fadeInDuration: Duration(milliseconds: 150),
                   placeholder: kTransparentImage,
                   image: imageUrl,
                   fit: BoxFit.cover,

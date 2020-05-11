@@ -10,7 +10,7 @@ class UPageRoute<T> extends MaterialPageRoute<T> {
       Animation<double> secondaryAnimation, Widget child) {
     return SlideTransition(
       position: Tween<Offset>(
-        begin: const Offset(1, 0),
+        begin: Offset(1, 0),
         end: Offset.zero,
       ).animate(CurvedAnimation(
           parent: animation,

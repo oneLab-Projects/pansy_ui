@@ -33,11 +33,10 @@ class ScaffoldSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
         color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 20).copyWith(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20).copyWith(
             bottom: MediaQuery.of(context).viewInsets.bottom + 10,
           ),
           child: Column(
@@ -45,8 +44,7 @@ class ScaffoldSheet extends StatelessWidget {
             children: <Widget>[
               if (title != null) _buildTitle(context),
               if (description != null) _buildDescription(context),
-              if (title != null || description != null)
-                const SizedBox(height: 23),
+              if (title != null || description != null) SizedBox(height: 23),
               child,
             ],
           ),
@@ -55,7 +53,7 @@ class ScaffoldSheet extends StatelessWidget {
 
   Widget _buildTitle(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,
         style: Theme.of(context).textTheme.headline6,
@@ -65,7 +63,7 @@ class ScaffoldSheet extends StatelessWidget {
 
   Widget _buildDescription(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 15),
       child: Text(
         description,
         textAlign: TextAlign.center,

@@ -11,7 +11,7 @@ class InputDesign extends InputDecoration {
               height: 1.4, color: Theme.of(context).textTheme.caption.color),
           prefixStyle: Theme.of(context).textTheme.subtitle1.copyWith(
               height: 1.4, color: Theme.of(context).textTheme.caption.color),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16),
           filled: true,
           fillColor: Theme.of(context).cardColor,
           enabledBorder: OutlineInputBorder(
@@ -38,7 +38,7 @@ class RoundInputDesign extends InputDecoration {
     String hintText,
   }) : super(
           hintText: hintText,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 18),
+          contentPadding: EdgeInsets.symmetric(horizontal: 18),
           filled: true,
           hintStyle: Theme.of(context).textTheme.subtitle1.copyWith(
                 fontSize: 17,
@@ -47,7 +47,7 @@ class RoundInputDesign extends InputDecoration {
           fillColor: Theme.of(context).cardColor,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(style: BorderStyle.none),
+            borderSide: BorderSide(style: BorderStyle.none),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),

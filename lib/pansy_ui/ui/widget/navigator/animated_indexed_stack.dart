@@ -38,7 +38,7 @@ class _AnimatedIndexedStackState extends State<AnimatedIndexedStack>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 150),
+      duration: Duration(milliseconds: 150),
     );
     _animation = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(

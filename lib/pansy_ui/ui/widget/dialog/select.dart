@@ -30,7 +30,7 @@ class SelectionDialog extends StatelessWidget {
     return Center(
       child: Container(
         width: 270,
-        constraints: const BoxConstraints(maxHeight: 365),
+        constraints: BoxConstraints(maxHeight: 365),
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(10),
@@ -38,7 +38,7 @@ class SelectionDialog extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
               blurRadius: 8,
-              offset: const Offset(0, 3),
+              offset: Offset(0, 3),
             ),
           ],
         ),
@@ -66,7 +66,7 @@ class SelectionDialog extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(height: 1),
+        Divider(height: 1),
         _buildActionItem(
             context,
             MaterialLocalizations.of(context).cancelButtonLabel,
@@ -86,10 +86,10 @@ class SelectionDialog extends StatelessWidget {
         splashColor: Colors.grey.withAlpha(30),
         onTap: () => Navigator.pop(context, returned ? title : null),
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           alignment: Alignment.center,
           child: Text(title,
-              strutStyle: const StrutStyle(
+              strutStyle: StrutStyle(
                 leading: 0,
               ),
               style: Theme.of(context).textTheme.button.copyWith(color: color)),

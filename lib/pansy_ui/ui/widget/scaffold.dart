@@ -48,7 +48,7 @@ class _UScaffoldState extends State<UScaffold> {
           children: <Widget>[
             if (widget.blurBackground) _buildBlurBackground(context),
             Container(
-              constraints: const BoxConstraints(maxWidth: 1000),
+              constraints: BoxConstraints(maxWidth: 1000),
               padding: EdgeInsets.symmetric(
                 horizontal: Device.isPhone(context) ? 0 : 28,
               ),
@@ -112,16 +112,16 @@ class _UScaffoldState extends State<UScaffold> {
                 step = UScaffold.titleHeight;
               }
 
-              Future.delayed(const Duration(milliseconds: 1), () {}).then((s) =>
+              Future.delayed(Duration(milliseconds: 1), () {}).then((s) =>
                   _scrollController.animateTo(step,
-                      duration: const Duration(milliseconds: 300),
+                      duration: Duration(milliseconds: 300),
                       curve: Curves.ease));
             }
 
             return false;
           },
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             controller: _scrollController,
             child: Column(
               children: <Widget>[
@@ -146,7 +146,7 @@ class _UScaffoldState extends State<UScaffold> {
     return Stack(
       children: <Widget>[
         Container(
-          constraints: const BoxConstraints(maxWidth: 1000),
+          constraints: BoxConstraints(maxWidth: 1000),
           alignment: Alignment.topCenter,
           child: SingleChildScrollView(
             controller: _backgroundScrollController,
@@ -180,7 +180,7 @@ class _UScaffoldState extends State<UScaffold> {
   /// Создаёт [ScrollView].
   Widget _content(context) {
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       child: Column(
         children: <Widget>[
           SizedBox(
@@ -244,7 +244,7 @@ class _UScaffoldState extends State<UScaffold> {
         _titleBarWithBackButton(context),
         Expanded(
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             child: widget.body,
           ),
         ),
@@ -255,7 +255,7 @@ class _UScaffoldState extends State<UScaffold> {
   /// Создаёт кнопку возврата на предыдущую страницу, и, если указано, заголовок страницы.
   Widget _titleBarWithBackButton(context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 11),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 11),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -265,7 +265,7 @@ class _UScaffoldState extends State<UScaffold> {
             iconData: Icons.arrow_back,
             iconSize: Device.isPhone(context) ? 24 : 27,
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           if (widget.title != null)
             Text(
               widget.title,

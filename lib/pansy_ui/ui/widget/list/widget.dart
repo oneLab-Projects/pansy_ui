@@ -24,7 +24,7 @@ class UListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ink(
       child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: 70),
+        constraints: BoxConstraints(minHeight: 70),
         child: InkWell(
           onTap: onPressed,
           onLongPress: onLongPress,
@@ -37,13 +37,13 @@ class UListWidget extends StatelessWidget {
   /// Создаёт контент виджета.
   Widget _buildContent(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+      padding: EdgeInsets.symmetric(horizontal: 22, vertical: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           if (iconData != null) _buildIcon(context),
           if (caption != null) _buildText(context),
-          if (control != null) const SizedBox(width: 20),
+          if (control != null) SizedBox(width: 20),
           if (control != null)
             Opacity(
               opacity: onPressed == null ? 0.5 : 1,
@@ -66,7 +66,7 @@ class UListWidget extends StatelessWidget {
               ? Theme.of(context).textTheme.button.color.withAlpha(150)
               : Theme.of(context).textTheme.button.color,
         ),
-        const SizedBox(width: 18),
+        SizedBox(width: 18),
       ],
     );
   }
@@ -96,7 +96,7 @@ class UListWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 6),
+        SizedBox(height: 6),
         Text(
           description,
           style: Theme.of(context).textTheme.caption.copyWith(
