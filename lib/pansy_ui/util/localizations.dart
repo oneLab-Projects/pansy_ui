@@ -50,6 +50,6 @@ class LocalizationTools {
 
     return supportedLocales.contains(Locale(localeLanguage))
         ? Locale(localeLanguage)
-        : Locale('en');
+        : const Locale('en');
   }
 }

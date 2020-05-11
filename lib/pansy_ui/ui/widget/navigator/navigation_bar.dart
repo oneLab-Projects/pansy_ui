@@ -25,10 +25,12 @@ class UBottomNavigationBar extends StatefulWidget {
   final ValueChanged<int> onTabSelected;
 
   UBottomNavigationBar({
+    Key key,
     @required this.items,
     this.iconSize: 24,
     this.onTabSelected,
-  }) : assert(items != null);
+  })  : assert(items != null),
+        super(key: key);
 
   static const double heightNavigationBarVertical = 50;
   static const double weightNavigationBarHorisontal = 60;
@@ -184,7 +186,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
                   bottom: 33,
                   left: 59,
                   child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.bounceOut,
                     width: item.badge ? 8 : 0,
                     height: item.badge ? 8 : 0,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Создаёт визуальный элемент переключателя.
 class USwitchVisual extends StatefulWidget {
   final bool value;
-  USwitchVisual(this.value);
+  USwitchVisual(this.value, {Key key}) : super(key: key);
 
   @override
   _USwitchVisualState createState() => _USwitchVisualState();
@@ -35,7 +35,7 @@ class _USwitchVisualState extends State<USwitchVisual> {
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
-                offset: widget.value ? Offset(-1, 1) : Offset(1, 1),
+                offset: widget.value ? const Offset(-1, 1) : const Offset(1, 1),
                 blurRadius: 3,
               ),
             ],

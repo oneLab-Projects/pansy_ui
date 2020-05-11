@@ -10,18 +10,19 @@ class URaisedButton extends StatelessWidget {
   final bool loading;
 
   URaisedButton(
+    Key key,
     this.text, {
     this.iconData,
     @required this.onPressed,
     this.onLongPress,
     this.loading = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
       opacity: onPressed != null ? 1 : 0.9,
-      duration: Duration(milliseconds: 150),
+      duration: const Duration(milliseconds: 150),
       child: Material(
         borderRadius: BorderRadius.circular(5),
         color: Theme.of(context).primaryColor,

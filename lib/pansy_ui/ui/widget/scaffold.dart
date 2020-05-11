@@ -12,11 +12,13 @@ class UScaffold extends StatefulWidget {
   final bool showBackButton;
 
   UScaffold({
+    Key key,
     this.title,
     @required this.body,
     this.blurBackground = false,
     this.showBackButton = true,
-  }) : assert(body != null);
+  })  : assert(body != null),
+        super(key: key);
 
   static const double titleHeight = 60;
 
@@ -45,7 +47,7 @@ class _UScaffoldState extends State<UScaffold> {
           children: <Widget>[
             if (widget.blurBackground) _buildBlurBackground(context),
             Container(
-              constraints: BoxConstraints(maxWidth: 1000),
+              constraints: const BoxConstraints(maxWidth: 1000),
               padding: EdgeInsets.symmetric(
                 horizontal: Device.isPhone(context) ? 0 : 28,
               ),
@@ -106,16 +108,16 @@ class _UScaffoldState extends State<UScaffold> {
               if (_scrollPosition > 0 && _scrollPosition < 0.6)
                 step = UScaffold.titleHeight;
 
-              Future.delayed(Duration(milliseconds: 1), () {}).then((s) =>
+              Future.delayed(const Duration(milliseconds: 1), () {}).then((s) =>
                   _scrollController.animateTo(step,
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       curve: Curves.ease));
             }
 
             return false;
           },
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             controller: _scrollController,
             child: Column(
               children: <Widget>[
@@ -140,7 +142,7 @@ class _UScaffoldState extends State<UScaffold> {
     return Stack(
       children: <Widget>[
         Container(
-          constraints: BoxConstraints(maxWidth: 1000),
+          constraints: const BoxConstraints(maxWidth: 1000),
           alignment: Alignment.topCenter,
           child: SingleChildScrollView(
             controller: _backgroundScrollController,
@@ -174,7 +176,7 @@ class _UScaffoldState extends State<UScaffold> {
   /// Создаёт [ScrollView].
   Widget _content(context) {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: <Widget>[
           SizedBox(
@@ -238,7 +240,7 @@ class _UScaffoldState extends State<UScaffold> {
         _titleBarWithBackButton(context),
         Expanded(
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: widget.body,
           ),
         ),

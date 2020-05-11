@@ -11,12 +11,14 @@ class UListSwitch extends StatefulWidget {
   final bool value;
 
   UListSwitch(
+    Key key,
     this.caption, {
     this.description,
     this.iconData,
     @required this.onChanged,
     @required this.value,
-  }) : assert(value != null);
+  })  : assert(value != null),
+        super(key: key);
 
   @override
   _UListSwitchState createState() => _UListSwitchState();

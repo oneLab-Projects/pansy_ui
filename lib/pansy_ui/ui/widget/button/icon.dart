@@ -9,12 +9,14 @@ class UIconButton extends StatelessWidget {
   final GestureTapCallback onPressed;
 
   UIconButton({
+    Key key,
     @required this.iconData,
     this.iconSize = 24,
     this.width = 45,
     this.height = 45,
     @required this.onPressed,
-  }) : assert(iconData != null || onPressed != null);
+  })  : assert(iconData != null || onPressed != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

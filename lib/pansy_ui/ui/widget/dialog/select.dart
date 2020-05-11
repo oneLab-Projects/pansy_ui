@@ -21,14 +21,16 @@ Future<String> showSelectionDialog<String>(BuildContext context,
 class SelectionDialog extends StatelessWidget {
   final List<dynamic> actions;
 
-  SelectionDialog({@required this.actions}) : assert(actions != null);
+  SelectionDialog({Key key, @required this.actions})
+      : assert(actions != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         width: 270,
-        constraints: BoxConstraints(maxHeight: 365),
+        constraints: const BoxConstraints(maxHeight: 365),
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(10),
@@ -36,7 +38,7 @@ class SelectionDialog extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
               blurRadius: 8,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),
@@ -64,7 +66,7 @@ class SelectionDialog extends StatelessWidget {
             ),
           ),
         ),
-        Divider(height: 1),
+        const Divider(height: 1),
         _buildActionItem(
             context,
             MaterialLocalizations.of(context).cancelButtonLabel,
@@ -87,7 +89,7 @@ class SelectionDialog extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           alignment: Alignment.center,
           child: Text(title,
-              strutStyle: StrutStyle(
+              strutStyle: const StrutStyle(
                 leading: 0,
               ),
               style: Theme.of(context).textTheme.button.copyWith(color: color)),

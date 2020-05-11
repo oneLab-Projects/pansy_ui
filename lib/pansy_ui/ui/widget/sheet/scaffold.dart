@@ -22,10 +22,12 @@ class ScaffoldSheet extends StatelessWidget {
   final Widget child;
 
   ScaffoldSheet({
+    Key key,
     this.title,
     this.description,
     @required this.child,
-  }) : assert(child != null);
+  })  : assert(child != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,8 @@ class ScaffoldSheet extends StatelessWidget {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20).copyWith(
+          padding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 20).copyWith(
             bottom: MediaQuery.of(context).viewInsets.bottom + 10,
           ),
           child: Column(

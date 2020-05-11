@@ -17,6 +17,7 @@ class ContentCard extends StatelessWidget {
   final ContentCardVariant variant;
 
   ContentCard({
+    Key key,
     this.title,
     this.description,
     this.image,
@@ -25,7 +26,8 @@ class ContentCard extends StatelessWidget {
     this.height,
     this.width,
     this.variant,
-  }) : assert(image == null || imageUrl == null);
+  })  : assert(image == null || imageUrl == null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +112,7 @@ class ContentCard extends StatelessWidget {
                   fit: BoxFit.cover,
                 )
               : FadeInImage.memoryNetwork(
-                  fadeInDuration: Duration(milliseconds: 150),
+                  fadeInDuration: const Duration(milliseconds: 150),
                   placeholder: kTransparentImage,
                   image: imageUrl,
                   fit: BoxFit.cover,

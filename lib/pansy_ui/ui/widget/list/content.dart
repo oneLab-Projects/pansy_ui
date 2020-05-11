@@ -13,6 +13,7 @@ class UListContent extends StatelessWidget {
   final bool variant;
 
   UListContent(
+    Key key,
     this.caption, {
     this.description,
     this.iconData,
@@ -20,12 +21,12 @@ class UListContent extends StatelessWidget {
     this.onLongPress,
     @required this.child,
     this.variant = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: 70),
+      constraints: const BoxConstraints(minHeight: 70),
       child: Stack(
         children: <Widget>[
           _buildContent(context),

@@ -12,12 +12,13 @@ class UListSelect extends StatelessWidget {
   final Function onPressed;
 
   UListSelect(
+    Key key,
     this.caption, {
     this.description,
     @required this.value,
     this.iconData,
     @required this.onPressed,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -47,7 +47,7 @@ class RoundInputDesign extends InputDecoration {
           fillColor: Theme.of(context).cardColor,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
-            borderSide: BorderSide(style: BorderStyle.none),
+            borderSide: const BorderSide(style: BorderStyle.none),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),

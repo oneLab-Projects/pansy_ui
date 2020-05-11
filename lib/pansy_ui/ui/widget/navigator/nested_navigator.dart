@@ -33,6 +33,7 @@ class UNestedNavigator extends StatefulWidget {
   final Color selectedColor;
 
   UNestedNavigator({
+    Key key,
     @required this.tabs,
     this.initTabIndex = 0,
     this.onTap,
@@ -41,7 +42,8 @@ class UNestedNavigator extends StatefulWidget {
     this.selectedColor,
     this.shouldHandlePop = _defaultShouldHandlePop,
     this.routes,
-  }) : assert(tabs != null);
+  })  : assert(tabs != null),
+        super(key: key);
 
   static bool _defaultShouldHandlePop() => true;
 
@@ -155,10 +157,11 @@ class UNestedTab extends StatelessWidget {
   final Map<String, Widget> routes;
 
   UNestedTab({
+    Key key,
     @required this.navigatorKey,
     @required this.initPageBuilder,
     @required this.routes,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

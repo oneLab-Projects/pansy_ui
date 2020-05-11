@@ -12,18 +12,19 @@ class UListWidget extends StatelessWidget {
 
   UListWidget(
     this.caption, {
+    Key key,
     this.description,
     this.iconData,
     @required this.onPressed,
     this.onLongPress,
     this.control,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Ink(
       child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: 70),
+        constraints: const BoxConstraints(minHeight: 70),
         child: InkWell(
           onTap: onPressed,
           onLongPress: onLongPress,

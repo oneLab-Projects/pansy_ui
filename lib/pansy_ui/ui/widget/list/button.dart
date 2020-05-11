@@ -12,12 +12,13 @@ class UListButton extends StatelessWidget {
   final Function onLongPress;
 
   UListButton(
+    Key key,
     this.caption, {
     this.description,
     this.iconData,
     @required this.onPressed,
     this.onLongPress,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
