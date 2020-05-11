@@ -11,16 +11,17 @@ class Device {
       height = MediaQuery.of(context).size.height;
     } else {
       devicePixelRatio = ui.window.devicePixelRatio;
-      ui.Size size = ui.window.physicalSize;
+      var size = ui.window.physicalSize;
       width = size.width;
       height = size.height;
     }
 
-    if (devicePixelRatio < 2 && (width >= 1000 || height >= 1000))
+    if (devicePixelRatio < 2 && (width >= 1000 || height >= 1000)) {
       return false;
-    else if (devicePixelRatio == 2 && (width >= 1920 || height >= 1920))
+    } else if (devicePixelRatio == 2 && (width >= 1920 || height >= 1920)) {
       return false;
-    else
+    } else {
       return true;
+    }
   }
 }

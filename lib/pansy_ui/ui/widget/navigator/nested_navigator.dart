@@ -94,11 +94,11 @@ class _UNestedNavigatorState extends State<UNestedNavigator> {
   Widget _buildBottomBarBackground() {
     Orientation orientation;
     orientation = MediaQuery.of(context).orientation;
-    double height = UBottomNavigationBar.getAlignment(context, orientation) ==
+    var height = UBottomNavigationBar.getAlignment(context, orientation) ==
             Alignment.bottomCenter
         ? UBottomNavigationBar.heightNavigationBarVertical
         : double.infinity;
-    double width = UBottomNavigationBar.getAlignment(context, orientation) ==
+    var width = UBottomNavigationBar.getAlignment(context, orientation) ==
             Alignment.bottomCenter
         ? double.infinity
         : UBottomNavigationBar.weightNavigationBarHorisontal;

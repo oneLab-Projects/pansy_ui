@@ -27,7 +27,7 @@ class UBottomNavigationBar extends StatefulWidget {
   UBottomNavigationBar({
     Key key,
     @required this.items,
-    this.iconSize: 24,
+    this.iconSize = 24,
     this.onTabSelected,
   })  : assert(items != null),
         super(key: key);
@@ -43,13 +43,14 @@ class UBottomNavigationBar extends StatefulWidget {
         : Alignment.centerLeft;
   }
 
+  @override
   _UBottomNavigationBarState createState() => _UBottomNavigationBarState();
 }
 
 class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
   int _selectedIndex = 0;
 
-  _updateIndex(int index) {
+  void _updateIndex(int index) {
     widget.onTabSelected(index);
     setState(() {
       _selectedIndex = index;
@@ -58,7 +59,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = List.generate(widget.items.length, (int index) {
+    var items = List<Widget>.generate(widget.items.length, (int index) {
       return _buildTabItem(
         item: widget.items[index],
         index: index,
@@ -72,32 +73,32 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
 
   /// Возвращает значение [Border], в зависимости от ориентации устройства.
   Border _alignmentToBorder(Alignment alignment, BorderSide side) {
-    if (alignment == Alignment.centerLeft)
+    if (alignment == Alignment.centerLeft) {
       return Border(right: side);
-    else
+    } else {
       return Border(top: side);
+    }
   }
 
   /// Создаёт нижнюю панель навигации.
   Widget _buildBottomNavigationBar(
       BuildContext context, List<Widget> items, Orientation orientation) {
-    double height = UBottomNavigationBar.getAlignment(context, orientation) ==
+    var height = UBottomNavigationBar.getAlignment(context, orientation) ==
             Alignment.bottomCenter
         ? UBottomNavigationBar.heightNavigationBarVertical
         : double.infinity;
-    double width = UBottomNavigationBar.getAlignment(context, orientation) ==
+    var width = UBottomNavigationBar.getAlignment(context, orientation) ==
             Alignment.bottomCenter
         ? double.infinity
         : UBottomNavigationBar.weightNavigationBarHorisontal;
-    Axis direction = UBottomNavigationBar.getAlignment(context, orientation) ==
+    var direction = UBottomNavigationBar.getAlignment(context, orientation) ==
             Alignment.bottomCenter
         ? Axis.horizontal
         : Axis.vertical;
-    double marginTop =
-        UBottomNavigationBar.getAlignment(context, orientation) ==
-                Alignment.bottomCenter
-            ? 0
-            : MediaQuery.of(context).padding.top;
+    var marginTop = UBottomNavigationBar.getAlignment(context, orientation) ==
+            Alignment.bottomCenter
+        ? 0
+        : MediaQuery.of(context).padding.top;
 
     return Align(
       alignment: UBottomNavigationBar.getAlignment(context, orientation),
@@ -159,7 +160,7 @@ class _UBottomNavigationBarState extends State<UBottomNavigationBar> {
     int index,
     ValueChanged<int> onPressed,
   }) {
-    IconData iconData = _selectedIndex == index && item.selectedIconData != null
+    var iconData = _selectedIndex == index && item.selectedIconData != null
         ? item.selectedIconData
         : item.iconData;
     return Expanded(

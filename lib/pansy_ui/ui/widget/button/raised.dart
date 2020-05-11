@@ -64,9 +64,9 @@ class URaisedButton extends StatelessWidget {
         width: 18,
         height: 18,
         child: FlareActor(
-          "resources/flare/loader.flr",
+          'resources/flare/loader.flr',
           color: Theme.of(context).disabledColor,
-          animation: "Init",
+          animation: 'Init',
         ),
       ),
     );

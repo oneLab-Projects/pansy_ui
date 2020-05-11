@@ -6,7 +6,8 @@ import 'package:rxdart/rxdart.dart';
 class LocalizationsBloc {
   Map<Locale, String> supportedLocales;
   Locale recommendedLocale;
-  BehaviorSubject<bool> _statusStream = BehaviorSubject<bool>.seeded(false);
+  final BehaviorSubject<bool> _statusStream =
+      BehaviorSubject<bool>.seeded(false);
 
   LocalizationsBloc(BuildContext context, [String path]) {
     LocalizationTools.getSupportedLocales(context, path).then((value) {

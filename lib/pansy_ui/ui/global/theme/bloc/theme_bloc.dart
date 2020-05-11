@@ -6,7 +6,7 @@ import 'package:rxdart/rxdart.dart';
 
 /// Создаёт BLoC (RxDart) для реализации смены темы в приложении.
 class ThemeBloc {
-  static const String _NIGHT_THEME = "ThemeBloc_NIGHT_THEME";
+  static const String _NIGHT_THEME = 'ThemeBloc_NIGHT_THEME';
   SharedPreferences _preferences;
   ThemeData _dayTheme;
   ThemeData _nightTheme;
@@ -27,7 +27,7 @@ class ThemeBloc {
 
   /// Задаёт, активирована ли ночная тема в приложении.
   set activatedNightTheme(bool value) {
-    ThemeData theme = value ? _dayTheme : _nightTheme;
+    var theme = value ? _dayTheme : _nightTheme;
     _subjectTheme.sink.add(theme);
     _saveSettings(value);
 
@@ -49,7 +49,7 @@ class ThemeBloc {
   /// Загружает настройки темы.
   void _loadSettings() async {
     _preferences ??= await SharedPreferences.getInstance();
-    bool value = _preferences.getBool(_NIGHT_THEME) ?? false;
+    var value = _preferences.getBool(_NIGHT_THEME) ?? false;
     activatedNightTheme = value;
   }
 

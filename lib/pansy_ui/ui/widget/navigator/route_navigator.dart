@@ -8,7 +8,7 @@ class RouteNavigator {
     Map<String, Widget> routes, [
     Function routeBuilder,
   ]) {
-    String key = routes.keys
+    var key = routes.keys
         .firstWhere((key) => key == settings.name, orElse: () => null);
     if (key == null) throw UnsupportedError('Unknown route: ${settings.name}');
 

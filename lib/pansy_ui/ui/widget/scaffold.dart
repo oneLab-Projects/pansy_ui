@@ -27,8 +27,9 @@ class UScaffold extends StatefulWidget {
 }
 
 class _UScaffoldState extends State<UScaffold> {
-  ScrollController _scrollController = ScrollController();
-  CustomScrollController _backgroundScrollController = CustomScrollController();
+  final ScrollController _scrollController = ScrollController();
+  final CustomScrollController _backgroundScrollController =
+      CustomScrollController();
   double _scrollPosition = 1;
 
   @override
@@ -84,10 +85,11 @@ class _UScaffoldState extends State<UScaffold> {
           onNotification: (scrollState) {
             if ((scrollState is ScrollUpdateNotification ||
                     scrollState is ScrollEndNotification) &&
-                widget.blurBackground)
+                widget.blurBackground) {
               _backgroundScrollController
                   .jumpToWithoutGoingIdleAndKeepingBallistic(
                       scrollState.metrics.pixels);
+            }
             if (scrollState is ScrollUpdateNotification &&
                 (UScaffold.titleHeight - scrollState.metrics.pixels) >= 0) {
               setState(() {
@@ -98,15 +100,17 @@ class _UScaffoldState extends State<UScaffold> {
                         100;
               });
             } else if (scrollState is ScrollUpdateNotification &&
-                (UScaffold.titleHeight - scrollState.metrics.pixels) < 0)
+                (UScaffold.titleHeight - scrollState.metrics.pixels) < 0) {
               setState(() => _scrollPosition = 0);
+            }
 
             if (scrollState is ScrollEndNotification &&
                 (UScaffold.titleHeight - scrollState.metrics.pixels) > 0 &&
                 _scrollPosition < 1) {
-              double step = 0;
-              if (_scrollPosition > 0 && _scrollPosition < 0.6)
+              var step = 0.0;
+              if (_scrollPosition > 0 && _scrollPosition < 0.6) {
                 step = UScaffold.titleHeight;
+              }
 
               Future.delayed(const Duration(milliseconds: 1), () {}).then((s) =>
                   _scrollController.animateTo(step,
@@ -304,8 +308,10 @@ class CustomScrollController extends ScrollController {
 
   void jumpToWithoutGoingIdleAndKeepingBallistic(double value) {
     assert(positions.isNotEmpty, 'ScrollController not attached.');
-    for (_SilentScrollPosition position in List<ScrollPosition>.from(positions))
+    for (_SilentScrollPosition position
+        in List<ScrollPosition>.from(positions)) {
       position.jumpToWithoutGoingIdleAndKeepingBallistic(value);
+    }
   }
 }
 
