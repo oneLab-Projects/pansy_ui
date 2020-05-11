@@ -46,6 +46,7 @@ class LocalizationTools {
       localeLanguage =
           (await Devicelocale.currentLocale).toLocale().languageCode;
     } else {
+      //TODO: найти аналог Devicelocale для остальных платформ
       localeLanguage = 'en';
     }
 

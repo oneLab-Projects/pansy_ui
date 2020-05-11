@@ -59,8 +59,8 @@ class _UScaffoldState extends State<UScaffold> {
                       ? _content(context)
                       : _contentWithTitleBar(context),
                 if (widget.showBackButton) _contentWithBackButton(context),
+                //TODO: оптимизировать Opacity (FadeTransition + Animation?)
                 Opacity(
-                  //TODO: оптимизировать (FadeTransition + Animation?)
                   opacity: _scrollPosition < 1 ? 1 - _scrollPosition : 0,
                   child: Container(
                     color:
