@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 /// Создаёт приподнятую кнопку.
@@ -40,34 +39,12 @@ class URaisedButton extends StatelessWidget {
   Widget _buildContent(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(16),
-      child: Stack(
-        alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              if (text != null && !loading) _buildText(context),
-              if (iconData != null && !loading) _buildIcon(context),
-            ],
-          ),
-          _buildLoader(context),
+          if (text != null && !loading) _buildText(context),
+          if (iconData != null && !loading) _buildIcon(context),
         ],
-      ),
-    );
-  }
-
-  /// Создаёт виджет, предоставляющий анимацию загрузки.
-  Widget _buildLoader(BuildContext context) {
-    return Visibility(
-      visible: loading,
-      child: SizedBox(
-        width: 18,
-        height: 18,
-        child: FlareActor(
-          'resources/flare/loader.flr',
-          color: Theme.of(context).disabledColor,
-          animation: 'Init',
-        ),
       ),
     );
   }

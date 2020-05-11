@@ -1,6 +1,7 @@
 name: pansy_ui
 description: A pretty GUI kit for Flutter.
-version: 1.0.0
+version: 0.0.1
+homepage: https://github.com/oneLab-Projects/picbox
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -11,7 +12,6 @@ dependencies:
 
   # design
   ubuntu_font_flutter: ^0.0.1
-  flare_flutter: ^2.0.1
   transparent_image: ^1.0.0
 
   # localizations
