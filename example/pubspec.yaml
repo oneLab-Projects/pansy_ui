@@ -1,0 +1,21 @@
+name: pansy_ui_demo
+description: Pansy UI Demo
+version: 0.0.1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #pansy_ui:
+  #  path: "../"
+  pansy_ui:
+    git: git://github.com/oneLab-Projects/pansy_ui.git
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

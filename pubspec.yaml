@@ -1,6 +1,6 @@
 name: pansy_ui
 description: A package for Flutter designed for fast development of a beautiful interface, in the style of oneLab applications.
-version: 0.0.1+1
+version: 0.0.2
 homepage: https://github.com/oneLab-Projects/picbox
 
 environment:
@@ -9,23 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # design
-  ubuntu_font_flutter: ^0.0.1
-  transparent_image: ^1.0.0
-
-  # localizations
-  devicelocale: ^0.2.3
-
-  # bloc
-  rxdart: ^0.24.0
-  provider: ^4.1.1
-
-  # db
-  shared_preferences: ^0.5.7+1
-
-  # compare
-  equatable: ^1.1.1
 
 dev_dependencies:
   pedantic: ^1.9.0
