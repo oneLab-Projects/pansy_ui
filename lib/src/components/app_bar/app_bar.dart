@@ -33,7 +33,7 @@ class AppBar extends StatelessWidget {
             children: [
               SizedBox(width: APPBAR_PADDING),
               Expanded(child: title),
-              Row(children: actions),
+              if (actions != null) Row(children: actions),
               SizedBox(width: APPBAR_PADDING - 10),
             ],
           ),

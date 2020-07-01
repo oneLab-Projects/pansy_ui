@@ -6,12 +6,14 @@ class Scaffold extends StatefulWidget {
   final AppBar appBar;
   final Widget body;
   final Widget floatingActionButton;
+  final Widget bottomNavigationBar;
 
   Scaffold({
     Key key,
     this.appBar,
     this.body,
     this.floatingActionButton,
+    this.bottomNavigationBar,
   }) : super(key: key);
 
   @override
@@ -24,13 +26,20 @@ class _ScaffoldState extends State<Scaffold> {
     return md.Scaffold(
       body: Column(
         children: [
-          widget.appBar,
-          Expanded(child: widget.body),
-          Container(
-            alignment: Alignment.bottomRight,
-            padding: EdgeInsets.all(20),
-            child: widget.floatingActionButton,
-          ),
+          if (widget.appBar != null) widget.appBar,
+          if (widget.body != null)
+            Expanded(
+                child: Stack(
+              children: <Widget>[
+                widget.body,
+                Container(
+                  alignment: Alignment.bottomRight,
+                  padding: EdgeInsets.all(20),
+                  child: widget.floatingActionButton,
+                ),
+              ],
+            )),
+          if (widget.bottomNavigationBar != null) widget.bottomNavigationBar,
         ],
       ),
     );
