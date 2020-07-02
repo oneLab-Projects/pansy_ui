@@ -15,14 +15,16 @@ class AppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget title = DefaultTextStyle(
-      style: Theme.of(context).textTheme.headline6.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-      softWrap: false,
-      overflow: TextOverflow.ellipsis,
-      child: this.title,
-    );
+    var title = this.title != null
+        ? DefaultTextStyle(
+            style: Theme.of(context).textTheme.headline6.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+            softWrap: false,
+            overflow: TextOverflow.ellipsis,
+            child: this.title,
+          )
+        : Container();
 
     return Column(
       children: [
