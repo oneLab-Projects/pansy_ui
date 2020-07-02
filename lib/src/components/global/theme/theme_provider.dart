@@ -5,11 +5,12 @@ typedef ThemedWidgetBuilder = Widget Function(ThemeMode data);
 class ThemeProvider extends StatefulWidget {
   const ThemeProvider({
     Key key,
-    this.themeMode,
-    this.builder,
-  }) : super(key: key);
+    @required this.initialThemeMode,
+    @required this.builder,
+  })  : assert(initialThemeMode != null || builder != null),
+        super(key: key);
 
-  final ThemeMode themeMode;
+  final ThemeMode initialThemeMode;
   final ThemedWidgetBuilder builder;
 
   @override
@@ -28,7 +29,7 @@ class ThemeProviderState extends State<ThemeProvider> {
   @override
   void initState() {
     super.initState();
-    _themeMode = widget.themeMode;
+    _themeMode = widget.initialThemeMode;
   }
 
   void setThemeMode(ThemeMode themeMode) {

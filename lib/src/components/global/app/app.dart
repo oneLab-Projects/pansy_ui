@@ -171,6 +171,7 @@ class _PansyAppState extends State<PansyApp> {
   @override
   Widget build(BuildContext context) {
     Widget result = ThemeProvider(
+      initialThemeMode: widget.themeMode,
       builder: (themeMode) {
         return WidgetsApp(
           key: GlobalObjectKey(this),
@@ -186,13 +187,12 @@ class _PansyAppState extends State<PansyApp> {
           onGenerateInitialRoutes: widget.onGenerateInitialRoutes,
           onUnknownRoute: widget.onUnknownRoute,
           builder: (BuildContext context, Widget child) {
-            final mode = themeMode ?? ThemeMode.system;
             ThemeData theme;
             if (widget.darkTheme != null) {
               final platformBrightness =
                   MediaQuery.platformBrightnessOf(context);
-              if (mode == ThemeMode.dark ||
-                  (mode == ThemeMode.system &&
+              if (themeMode == ThemeMode.dark ||
+                  (themeMode == ThemeMode.system &&
                       platformBrightness == Brightness.dark)) {
                 theme = widget.darkTheme;
               }
