@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:pansy_ui/pansy_ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
@@ -170,73 +170,78 @@ class _PansyAppState extends State<PansyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Widget result = WidgetsApp(
-      key: GlobalObjectKey(this),
-      navigatorKey: widget.navigatorKey,
-      navigatorObservers: _navigatorObservers,
-      pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) {
-        return MaterialPageRoute<T>(settings: settings, builder: builder);
-      },
-      home: widget.home,
-      routes: widget.routes,
-      initialRoute: widget.initialRoute,
-      onGenerateRoute: widget.onGenerateRoute,
-      onGenerateInitialRoutes: widget.onGenerateInitialRoutes,
-      onUnknownRoute: widget.onUnknownRoute,
-      builder: (BuildContext context, Widget child) {
-        final mode = widget.themeMode ?? ThemeMode.system;
-        ThemeData theme;
-        if (widget.darkTheme != null) {
-          final platformBrightness = MediaQuery.platformBrightnessOf(context);
-          if (mode == ThemeMode.dark ||
-              (mode == ThemeMode.system &&
-                  platformBrightness == Brightness.dark)) {
-            theme = widget.darkTheme;
-          }
-        }
-        theme ??= widget.theme ?? ThemeData.fallback();
+    Widget result = ThemeProvider(
+      builder: (themeMode) {
+        return WidgetsApp(
+          key: GlobalObjectKey(this),
+          navigatorKey: widget.navigatorKey,
+          navigatorObservers: _navigatorObservers,
+          pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) {
+            return MaterialPageRoute<T>(settings: settings, builder: builder);
+          },
+          home: widget.home,
+          routes: widget.routes,
+          initialRoute: widget.initialRoute,
+          onGenerateRoute: widget.onGenerateRoute,
+          onGenerateInitialRoutes: widget.onGenerateInitialRoutes,
+          onUnknownRoute: widget.onUnknownRoute,
+          builder: (BuildContext context, Widget child) {
+            final mode = themeMode ?? ThemeMode.system;
+            ThemeData theme;
+            if (widget.darkTheme != null) {
+              final platformBrightness =
+                  MediaQuery.platformBrightnessOf(context);
+              if (mode == ThemeMode.dark ||
+                  (mode == ThemeMode.system &&
+                      platformBrightness == Brightness.dark)) {
+                theme = widget.darkTheme;
+              }
+            }
+            theme ??= widget.theme ?? ThemeData.fallback();
 
-        _setSystemUIOverlayStyleFromTheme(theme);
+            _setSystemUIOverlayStyleFromTheme(theme);
 
-        if (widget.debugShowCheckedModeBanner) {
-          child = _buildDebugBanner(child, context, theme);
-        }
+            if (widget.debugShowCheckedModeBanner) {
+              child = _buildDebugBanner(child, context, theme);
+            }
 
-        return AnimatedTheme(
-          data: theme,
-          isMaterialAppTheme: true,
-          child: widget.builder != null
-              ? Builder(
-                  builder: (BuildContext context) {
-                    return widget.builder(context, child);
-                  },
-                )
-              : child,
+            return AnimatedTheme(
+              data: theme,
+              isMaterialAppTheme: true,
+              child: widget.builder != null
+                  ? Builder(
+                      builder: (BuildContext context) {
+                        return widget.builder(context, child);
+                      },
+                    )
+                  : child,
+            );
+          },
+          title: widget.title,
+          onGenerateTitle: widget.onGenerateTitle,
+          textStyle: _errorTextStyle,
+          color: widget.color ?? widget.theme?.primaryColor ?? Colors.blue,
+          locale: widget.locale,
+          localizationsDelegates: _localizationsDelegates,
+          localeResolutionCallback: widget.localeResolutionCallback,
+          localeListResolutionCallback: widget.localeListResolutionCallback,
+          supportedLocales: widget.supportedLocales,
+          showPerformanceOverlay: widget.showPerformanceOverlay,
+          checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
+          checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
+          showSemanticsDebugger: widget.showSemanticsDebugger,
+          debugShowCheckedModeBanner: false,
+          inspectorSelectButtonBuilder:
+              (BuildContext context, VoidCallback onPressed) {
+            return FloatingActionButton(
+              child: const Icon(Icons.search),
+              onPressed: onPressed,
+              mini: true,
+            );
+          },
+          shortcuts: widget.shortcuts,
         );
       },
-      title: widget.title,
-      onGenerateTitle: widget.onGenerateTitle,
-      textStyle: _errorTextStyle,
-      color: widget.color ?? widget.theme?.primaryColor ?? Colors.blue,
-      locale: widget.locale,
-      localizationsDelegates: _localizationsDelegates,
-      localeResolutionCallback: widget.localeResolutionCallback,
-      localeListResolutionCallback: widget.localeListResolutionCallback,
-      supportedLocales: widget.supportedLocales,
-      showPerformanceOverlay: widget.showPerformanceOverlay,
-      checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
-      checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
-      showSemanticsDebugger: widget.showSemanticsDebugger,
-      debugShowCheckedModeBanner: false,
-      inspectorSelectButtonBuilder:
-          (BuildContext context, VoidCallback onPressed) {
-        return FloatingActionButton(
-          child: const Icon(Icons.search),
-          onPressed: onPressed,
-          mini: true,
-        );
-      },
-      shortcuts: widget.shortcuts,
     );
 
     assert(() {

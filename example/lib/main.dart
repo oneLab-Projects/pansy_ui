@@ -58,6 +58,11 @@ class _HomePageState extends State<HomePage> {
           style: Theme.of(context).textTheme.headline2,
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.visibility),
+        onPressed: () => ThemeProvider.of(context).toggleThemeMode(),
+        tooltip: 'Change theme',
+      ),
     );
   }
 }
