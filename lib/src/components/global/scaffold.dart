@@ -7,6 +7,8 @@ class Scaffold extends StatefulWidget {
   final Widget body;
   final Widget floatingActionButton;
   final Widget bottomNavigationBar;
+  final bool extendBody;
+  final bool extendBodyBehindAppBar;
 
   Scaffold({
     Key key,
@@ -14,6 +16,8 @@ class Scaffold extends StatefulWidget {
     this.body,
     this.floatingActionButton,
     this.bottomNavigationBar,
+    this.extendBody = false,
+    this.extendBodyBehindAppBar = false,
   }) : super(key: key);
 
   @override
@@ -24,22 +28,42 @@ class _ScaffoldState extends State<Scaffold> {
   @override
   Widget build(BuildContext context) {
     return md.Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          if (widget.appBar != null) widget.appBar,
-          if (widget.body != null)
-            Expanded(
-                child: Stack(
-              children: <Widget>[
-                widget.body,
-                Container(
-                  alignment: Alignment.bottomRight,
-                  padding: EdgeInsets.all(20),
-                  child: widget.floatingActionButton,
+          Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).padding.top,
+              ),
+              if (widget.appBar != null && !widget.extendBodyBehindAppBar)
+                SizedBox(
+                  height: APPBAR_HEIGHT,
                 ),
-              ],
-            )),
-          if (widget.bottomNavigationBar != null) widget.bottomNavigationBar,
+              if (widget.body != null) Expanded(child: widget.body),
+              if (widget.bottomNavigationBar != null && !widget.extendBody)
+                SizedBox(
+                  height: APPBAR_HEIGHT,
+                ),
+            ],
+          ),
+          Column(
+            children: [
+              if (widget.appBar != null) widget.appBar,
+              if (widget.body != null)
+                Expanded(
+                    child: Stack(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.bottomRight,
+                      padding: EdgeInsets.all(20),
+                      child: widget.floatingActionButton,
+                    ),
+                  ],
+                )),
+              if (widget.bottomNavigationBar != null)
+                widget.bottomNavigationBar,
+            ],
+          ),
         ],
       ),
     );
