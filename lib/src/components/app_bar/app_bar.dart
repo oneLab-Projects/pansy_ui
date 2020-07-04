@@ -46,7 +46,7 @@ class AppBar extends StatelessWidget {
               if (!showBackButton) SizedBox(width: APPBAR_PADDING),
               Expanded(child: title),
               if (actions != null) Row(children: actions),
-              SizedBox(width: APPBAR_PADDING - 10),
+              SizedBox(width: APPBAR_PADDING - 6),
             ],
           ),
         ),
