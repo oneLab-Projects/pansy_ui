@@ -8,10 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  #pansy_ui:
-  #  path: "../"
   pansy_ui:
-    git: git://github.com/oneLab-Projects/pansy_ui.git
+    path: "../"
 
 dev_dependencies:
   flutter_test:
