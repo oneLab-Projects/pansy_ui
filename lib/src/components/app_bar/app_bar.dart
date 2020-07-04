@@ -15,6 +15,8 @@ class AppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var showBackButton = Navigator.of(context).canPop();
+
     var title = this.title != null
         ? DefaultTextStyle(
             style: Theme.of(context).textTheme.headline6.copyWith(
@@ -33,7 +35,15 @@ class AppBar extends StatelessWidget {
           height: APPBAR_HEIGHT,
           child: Row(
             children: [
-              SizedBox(width: APPBAR_PADDING),
+              if (showBackButton)
+                Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              if (!showBackButton) SizedBox(width: APPBAR_PADDING),
               Expanded(child: title),
               if (actions != null) Row(children: actions),
               SizedBox(width: APPBAR_PADDING - 10),
