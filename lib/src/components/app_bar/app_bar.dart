@@ -15,7 +15,8 @@ class AppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var showBackButton = Navigator.of(context).canPop();
+    final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
+    final canPop = parentRoute?.canPop ?? false;
 
     var title = this.title != null
         ? DefaultTextStyle(
@@ -35,7 +36,7 @@ class AppBar extends StatelessWidget {
           height: APPBAR_HEIGHT,
           child: Row(
             children: [
-              if (showBackButton)
+              if (canPop)
                 Padding(
                   padding: EdgeInsets.only(left: 10, right: 10),
                   child: IconButton(
@@ -43,7 +44,7 @@ class AppBar extends StatelessWidget {
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                 ),
-              if (!showBackButton) SizedBox(width: APPBAR_PADDING),
+              if (!canPop) SizedBox(width: APPBAR_PADDING),
               Expanded(child: title),
               if (actions != null) Row(children: actions),
               SizedBox(width: APPBAR_PADDING - 6),
