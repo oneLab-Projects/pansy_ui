@@ -9,6 +9,7 @@ class Scaffold extends StatefulWidget {
   final Widget bottomNavigationBar;
   final bool extendBody;
   final bool extendBodyBehindAppBar;
+  final bool extendBodyBehindStatusBar;
 
   Scaffold({
     Key key,
@@ -18,6 +19,7 @@ class Scaffold extends StatefulWidget {
     this.bottomNavigationBar,
     this.extendBody = false,
     this.extendBodyBehindAppBar = false,
+    this.extendBodyBehindStatusBar = false,
   }) : super(key: key);
 
   @override
@@ -32,9 +34,8 @@ class _ScaffoldState extends State<Scaffold> {
         children: [
           Column(
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).padding.top,
-              ),
+              if (!widget.extendBodyBehindStatusBar)
+                SizedBox(height: MediaQuery.of(context).padding.top),
               if (widget.appBar != null && !widget.extendBodyBehindAppBar)
                 SizedBox(
                   height: APPBAR_HEIGHT,
